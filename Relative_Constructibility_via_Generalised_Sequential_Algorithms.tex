@@ -111,8 +111,6 @@ We modify Gurevich's definition of sequential algorithms, so that it becomes ame
 
 \section{Introduction}\label{sect1}
 
-\subsection{Generalising Computation}
-
 Conventionally, across nearly all fields of study, a \textit{computation} refers to a \textit{terminating run} of some \textit{computer}. In the abstract, modern equivalents of the term \textit{computer} range from \textit{algorithm} to \textit{program}. It should thus be non-contentious to say that, any difficulty in formally defining a computation must come from formally defining a program.
 
 So, what exactly is a program? To a software engineer, it might be a compilable piece of code written in any known programming language, e.g. Java. To a mathematician, it could be any Turing machine. Here, the class of compilable Java codes and the class of Turing machines are two classes defined by different \textit{models of computation}, at arguably different levels of abstraction. In principle, a model of computation ought to 
@@ -148,9 +146,9 @@ Disregarding infinitary computation for a moment, perhaps the most celebrated at
 
 Going by the semantic abstraction of Gurevich, algorithms far more closely resemble ``high-level'' meta-theoretic representations of Plotkin-style semantics (found e.g. in \cite{plotkin}), than they do anything among \ref{ct1} to \ref{ct3}. That their syntactic counterparts --- the programming languages associated with abstract state machines --- have been adapted for use in fields ranging from software development to systems engineering via (what is now known as) the \textit{ASM method} is testament to the intuitiveness of Gurevich's design. Historical details regarding the ASM method can be found in \cite{borger} and Chapter 9 of \cite{borgerbook}. Having said all that, how well this abstraction is equipped to handle the philosophical demands of computing with infinite sets is yet to be vigorously tested, for its applications have so far been finitary in nature.
 
-In this chapter, we adapt Gurevich's \textit{sequential algorithms} for generalised computations. We make well-meaning modifications to their definition along the way, so that their growth in computational power does not contradict our intuition of computation born out of classical computing. 
+In this paper, we adapt Gurevich's \textit{sequential algorithms} for generalised computations. We make well-meaning modifications to their definition along the way, so that their growth in computational power does not contradict our intuition of computation born out of classical computing. 
 
-\subsection{Generalising Computability}\label{subsec22}
+\subsection{Generalisations of (Relative) Computability}\label{subsec22}
 
 A notion of computability is meant to chart the limits of what can and cannot be computed. In the classical case, we hold the Church-Turing thesis responsible for this purpose, a responsibility rooted in its convincing portrayal of computer-hood. Indeed, the hallowed status afforded to the Church-Turing thesis stems from the unlikely convergence in power of what seems to be independently-devised models of computation.
 
