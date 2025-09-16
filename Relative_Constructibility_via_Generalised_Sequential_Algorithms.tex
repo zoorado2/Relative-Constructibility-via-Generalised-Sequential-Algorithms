@@ -146,7 +146,13 @@ Disregarding infinitary computation for a moment, perhaps the most celebrated at
 
 Going by the semantic abstraction of Gurevich, algorithms far more closely resemble ``high-level'' meta-theoretic representations of Plotkin-style semantics (found e.g. in \cite{plotkin}), than they do anything among \ref{ct1} to \ref{ct3}. That their syntactic counterparts --- the programming languages associated with abstract state machines --- have been adapted for use in fields ranging from software development to systems engineering via (what is now known as) the \textit{ASM method} is testament to the intuitiveness of Gurevich's design. Historical details regarding the ASM method can be found in \cite{borger} and Chapter 9 of \cite{borgerbook}. Having said all that, how well this abstraction is equipped to handle the philosophical demands of computing with infinite sets is yet to be vigorously tested, for its applications have so far been finitary in nature.
 
-In this paper, we adapt Gurevich's \textit{sequential algorithms} for generalised computations. We make well-meaning modifications to their definition along the way, so that their growth in computational power does not contradict our intuition of computation born out of classical computing. 
+In this paper, we adapt Gurevich's \textit{sequential algorithms} for generalised computations. We make well-meaning modifications to his definition along the way, so that even as such algorithms become more encompassing, the growth in their computational power does not contradict our intuition of computation born out of classical computing. In Subsection \ref{ss210}, we see that plainly omitting the \textit{bounded exploration postulate} from the initial definition of sequential algorithms is wholly unsatisfactory from a set-theoretic standpoint. The remainder of Section \ref{sect2} is thus geared towards finding the right properties to endow a generalised sequential algorithm with, properties that can plug the gap left behind by the aforementioned omission. Notable milestones in this search/journey include:
+\begin{itemize}
+    \item a very much local, yet infinitary, version of the bounded exploration postulate formulated in Subsection \ref{ss240},
+    \item a streamlined method of writing the input and reading the output of a terminating run devised in Subsection \ref{ss250},
+    \item the definition of transfinite runs in Subsection \ref{ss270}, accompanied by an argument about the nigh-universality of our method of taking limits, and
+    \item the addition of ordinal parameters in Subsection \ref{ss320} for a better behaved relative computability relation.
+\end{itemize}
 
 \subsection{Generalisations of (Relative) Computability}\label{subsec22}
 
@@ -204,7 +210,7 @@ The way the notion of sequential algorithms is enhanced results in a new model o
 
 In this section, we progressively modify the definition of a sequential algorithm, to arrive at a more concrete notion of algorithms which also better captures our intuition of generalised computation. 
 
-\subsection{Formal Sequential Algorithms}
+\subsection{Formal Sequential Algorithms}\label{ss210}
 
 Gurevich introduced the \textit{ASM thesis} in \cite{gurevich} as a justification of correctness for his definition of (a most general conceptualisation of) a sequential algorithm. He followed it up with a number of collaborations and papers (e.g. \cite{gurevichblass}) on various other classes of algorithms. If we follow the convention of using ``algorithm'' and ``computer program'' interchangeably, then sequential algorithms are natural candidates for capturing a general notion of computability. However, it seems that Gurevich himself had not intended for sequential algorithms to capture computation on an infinitary scale. We shall start this section with a brief examination on how ill-equipped his definition is at dealing with generalised computation. 
 
@@ -476,7 +482,7 @@ Finally,
 is a first-order sentence over $2 \cdot \sigma(\mathfrak{M})$ that gives us the representation we want.
 \end{ex}
 
-\subsection{Absoluteness and the Bounded Exploration Postulate Revisited}
+\subsection{Absoluteness and the Bounded Exploration Postulate Revisited}\label{ss240}
 
 A good notion of algorithm ought to be absolute to a certain degree. In set-theoretic contexts, absoluteness for transitive models of set theory comes up the most often. 
 
@@ -622,7 +628,7 @@ A few things are easily verifiable from Definition \ref{def220}. Let $\sigma$, $
     \item Suppose $\phi = \phi^{\tau}_{\mathfrak{M}}$ for some SeqA $\mathfrak{M}$. Then in the context of $\mathfrak{M}$, for each $\ulcorner X \urcorner \in \sigma$, the value of the next state's interpretation of $\ulcorner X \urcorner$ at a point depends only on finitely many values of the current state's interpretations of symbols in $\sigma$. This agrees in spirit with the requirement of bounded exploration.
 \end{enumerate}
 
-\subsection{Input and Output}
+\subsection{Input and Output}\label{ss250}
 
 In Example \ref{ex212}, we are able to easily read the input of a Turing machine off its corresponding initial state in the SeqA representation. Similarly, we expect to easily read the output off any of its final states. These are self-evident desiderata if we were to port the input-output paradigm of computability to SeqAs. 
 
@@ -919,7 +925,7 @@ A routine check would reveal that the aforementioned details are sufficient to s
 
 From the next subsection onwards, the construction of GSeqAs used in proofs and arguments can be too cumbersome to formally spell out. In such cases, only high-level details will be given. The reader should always try to convince themselves that those details can be properly realised by GSeqAs.
 
-\subsection{Transfinite Runs}
+\subsection{Transfinite Runs}\label{ss270}
 
 Consider a finite terminating run $\Vec{s} = (s_1, \dots, s_n)$ of a GSeqA $\mathfrak{M}$. Then by combining witnesses to $\phi^{\tau}_{\mathfrak{M}}$ being bounded for $\sigma(\mathfrak{M})$, we can conjure witnesses to some sentence $\phi$ being bounded for $\sigma(\mathfrak{M})$, such that using $\phi$ in place of $\phi^{\tau}_{\mathfrak{M}}$ in the definition of $\mathfrak{M}$ gives us a GSeqA $\mathfrak{M}'$ with $\tau_{\mathfrak{M}'}(s_1) = s_n$. Therefore, as far as computability is concerned, allowing finite steps of arbitrary sizes in computations is no more powerful than allowing only one-step computations. This goes to show that
 GSeqAs are in fact built for runs of infinite lengths.
@@ -1203,7 +1209,7 @@ Let $\mathfrak{M}$ be a GSeqA witnessing $A \leq^C_{\kappa} B$. Define a GSeqA $
 Set $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$ to be the relativised versions of $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ respectively. Then $\mathfrak{M}'$ witnesses $A \leq^C_{\kappa'} B$.
 \end{proof}
 
-\subsection{Further Modifications}
+\subsection{Further Modifications}\label{ss320}
 
 The definability requirement in Proposition \ref{prop246} hinders us from concluding the transitivity of $\leq^C$. One can read this as a sign that $\leq^C$, and by extension the $\leq^C_{\kappa}$s, is not quite the right notion of relative computability.
 
