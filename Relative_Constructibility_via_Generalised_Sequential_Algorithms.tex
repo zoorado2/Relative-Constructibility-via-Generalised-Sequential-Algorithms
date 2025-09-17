@@ -214,17 +214,25 @@ In this section, we progressively modify the definition of a sequential algorith
 
 Gurevich introduced the \textit{ASM thesis} in \cite{gurevich} as a justification of correctness for his definition of (a most general conceptualisation of) a sequential algorithm. He followed it up with a number of collaborations and papers (e.g. \cite{gurevichblass}) on various other classes of algorithms. If we follow the convention of using ``algorithm'' and ``computer program'' interchangeably, then sequential algorithms are natural candidates for capturing a general notion of computability. However, it seems that Gurevich himself had not intended for sequential algorithms to capture computation on an infinitary scale. We shall start this section with a brief examination on how ill-equipped his definition is at dealing with generalised computation. 
 
-Briefly, a \emph{sequential algorithm} --- henceforth \textit{SeqA}, to distinguish the formal concept from the colloquial --- $\mathfrak{M}$ comprises a class of states $S(\mathfrak{M})$, a class of initial states $I(\mathfrak{M})$, a class transition function $\tau_{\mathfrak{M}} : S(\mathfrak{M}) \longrightarrow S(\mathfrak{M})$, and a finite set $G$ of ground terms over $\sigma(\mathfrak{M})$ such that
+Briefly, a \emph{sequential algorithm} --- henceforth \textit{SeqA}, to distinguish the formal concept from the colloquial --- $\mathfrak{M}$ comprises a class of states $S(\mathfrak{M})$, a class of initial states $I(\mathfrak{M})$, a class transition function $\tau_{\mathfrak{M}} : S(\mathfrak{M}) \longrightarrow S(\mathfrak{M})$, and a finite set $G$ of ground terms over $\sigma(\mathfrak{M})$ such that, letting $G^s$ denote the function $\dot{x} \mapsto \dot{x}^s$ with domain $G$,
 \begin{enumerate}[label=(A\arabic*)]
     \item\label{a1} every $s \in S(\mathfrak{M})$ is a first-order structure with the same finite signature, $\sigma(\mathfrak{M})$,
     \item\label{a2} $I(\mathfrak{M}) \subset S(\mathfrak{M})$,
-    \item\label{a3'} for all $s \in S(\mathfrak{M})$, $\tau_{\mathfrak{M}}(s)$ has the same base set as $s$
-    \item\label{a3} for all $s \in S(\mathfrak{M})$, $\tau_{\mathfrak{M}}(s)$ differs from $s$ on no more than the interpretation of terms in $G$, and
-    \item\label{a4} for all $s, s' \in S(\mathfrak{M})$, letting $G^s$ denote the function $\dot{x} \mapsto \dot{x}^s$ with domain $G$,
-    \begin{itemize}
-        \item $ran(G^{\tau_{\mathfrak{M}}(s)}) \subset ran(G^s)$, and
-        \item if $G^s = G^{s'}$, then $G^{\tau_{\mathfrak{M}}(s)} = G^{\tau_{\mathfrak{M}}(s')}$.
-    \end{itemize}
+    \item\label{a3'} for all $s \in S(\mathfrak{M})$, $\tau_{\mathfrak{M}}(s)$ has the same base set $b_{\mathfrak{M}}(s)$ as $s$
+    \item\label{a3} for all $s \in S(\mathfrak{M})$, $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$, $n < \omega$ and $\Vec{a} \in b_{\mathfrak{M}}(s)^n$, if $n$ is the arity of $\ulcorner X \urcorner$, then
+    \begin{equation*}
+        \ulcorner X \urcorner^s(\Vec{a}) \neq \ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s)}(\Vec{a}) \implies \Vec{a}^\frown(\ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s)}(\Vec{a})) \in ran(G^s)^{n+1}
+    \end{equation*}
+    whenever $\ulcorner X \urcorner$ is a function or constant symbol and
+    \begin{equation*}
+        \neg (\ulcorner X \urcorner^s(\Vec{a}) \iff \ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s)}(\Vec{a})) \implies \Vec{a} \in ran(G^s)^n
+    \end{equation*}
+    whenever $\ulcorner X \urcorner$ is a relation symbol, and
+    \item\label{a4} for all $s, s' \in S(\mathfrak{M})$, $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ and $n < \omega$, if $n$ is the arity of $\ulcorner X \urcorner$ and $G^s = G^{s'}$, then whenever $\Vec{a} \in ran(G^s)^n$,
+    \begin{align*}
+        \ulcorner X \urcorner^{s} \text{ agrees with } \ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s)} \text{ at } \Vec{a} \iff \ & \ulcorner X \urcorner^{s'} \text{ agrees with } \ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s')} \text{ at } \Vec{a} \text{, and} \\
+        \ulcorner X \urcorner^{s} \text{ disagrees with } \ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s)} \text{ at } \Vec{a} \implies \ & \ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s)} \text{ agrees with } \ulcorner X \urcorner^{\tau_{\mathfrak{M}}(s')} \text{ at } \Vec{a} \text{.}
+    \end{align*}
 \end{enumerate}
 A (finite) terminating run of $\mathfrak{M}$ is a sequence of states $(s_i : i \leq n < \omega)$ for which
 \begin{enumerate}[label=(B\arabic*)]
