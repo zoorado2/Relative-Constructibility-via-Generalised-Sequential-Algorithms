@@ -111,48 +111,43 @@ We modify Gurevich's definition of sequential algorithms, so that it becomes ame
 
 \section{Introduction}\label{sect1}
 
-Conventionally, across nearly all fields of study, a \textit{computation} refers to a \textit{terminating run} of some \textit{computer}. In the abstract, modern equivalents of the term \textit{computer} range from \textit{algorithm} to \textit{program}. It should thus be non-contentious to say that, any difficulty in formally defining a computation must come from formally defining a program.
-
-So, what exactly is a program? To a software engineer, it might be a compilable piece of code written in any known programming language, e.g. Java. To a mathematician, it could be any Turing machine. Here, the class of compilable Java codes and the class of Turing machines are two classes defined by different \textit{models of computation}, at arguably different levels of abstraction. In principle, a model of computation ought to 
-\begin{itemize}
-    \item include the definition of a run, as well as
-    \item specify precise conditions for a run to be terminating.
-\end{itemize} 
-Following the line of thinking inspired by our two examples, it seems convenient --- even natural --- to define a program as any object admitted by a fixed model of computation. 
-
 Models of computation studied by computer scientists and mathematicians are aplenty. They include common programming languages, along with the semantics (see e.g.\cite{scott} and \cite{meyer}) --- in various paradigms --- associated with each language. They also include stalwarts from almost a century ago, three of which are
 \begin{enumerate}[leftmargin=40pt, label=(CT\arabic*)]
     \item\label{ct1} G\"{o}del's operation schema,
     \item Church's $\lambda$-calculus, and of course
     \item\label{ct3} Turing machines.
 \end{enumerate}
-One obvious commonality of said models of computation is, they admit only finitary programs and runs. It follows that these models forbid \textit{infinitary computations}, which is understandable and justified, considering infinitary computations are intuitively unrealisable in the real world. 
+That all these models of computation possess the same computational power is great evidence for the Church-Turing thesis. However, modern intuition of computation has evolved to become rather high-level, and the formal models \ref{ct1} to \ref{ct3} which motivated the Church-Turing thesis have been relegated to play the roles of convenient mathematical foundations, instead of anything resembling practical mental models of computation.
 
-But what if someone takes mathematical and philosophical interest in defining and studying infinitary computations, real-world considerations be damned? Is there inherent technical difficulty in doing so? The answer is, ``No, not really,'' as evidenced by a multitude of well-received attempts (as much as a subject this niched can be well-received) at generalising computation to the infinite. Such generalisations are appropriately termed \textit{models of generalised computation}.
+Perhaps the most celebrated attempt at amalgamating and formalising useful mental models of computations was born out of this realisation. In a series of papers (starting with \cite{gurevich}), Gurevich gave (closely related) semantic axiomatisations of abstract algorithms, and showed how these algorithms are captured by sufficiently machine-like models called \textit{abstract state machines}. Abstract state machines were defined by Gurevich himself way back in the 1980s, although more organised literature thereof only became available in the 1990s. A full definition of these machines can be found in e.g. \cite{evolvingalg}.
 
-Since many decades ago, mathematical logicians have tried their hand at adapting models among \ref{ct1} to \ref{ct3} to allow computations with, and on, arbitrary sets.
+Going by the semantic abstraction of Gurevich, algorithms far more closely resemble ``high-level'' meta-theoretic representations of Plotkin-style semantics (found e.g. in \cite{plotkin}), than they do anything among \ref{ct1} to \ref{ct3}. That their syntactic counterparts --- the programming languages associated with abstract state machines --- have been adapted for use in fields ranging from software development to systems engineering via (what is now known as) the \textit{ASM method} is testament to the intuitiveness of Gurevich's design. Historical details regarding the ASM method can be found in \cite{borger} and Chapter 9 of \cite{borgerbook}.
+
+One obvious commonality of all models of computation hitherto mentioned is that they admit only finitary computation, which is understandable and justified, considering infinitary computations are unrealisable in the real world. But are there inherent technical difficulties in formalising infinitary computation? The answer is ``No, not really,'' as evidenced by a multitude of well-received attempts (as much as a subject this niched can be well-received) at generalising computation to the infinite. Such generalisations are appropriately termed \textit{models of generalised computation}.
+
+Since many decades ago, mathematical logicians have tried their hand at adapting models among \ref{ct1} to \ref{ct3} to allow computations with and on arbitrary sets.
 
 From the perspective of recursion theory, where the structure of Turing degrees under Turing reducibility and the jump operator is the main object study, leading candidates include $\alpha$-recursion and $E$-recursion. Both paradigms depend on models of computation that generalises \ref{ct1} with schemata on arbitrary sets (see e.g. \cite{takeuti} and \cite{normann}). These schemata give rise to analogues of important results in classical recursion theory, on sets that can be much larger than reals. 
 
 From the perspective of ``computer as a machine'', we have Koepke's ordinal Turing machines (see \cite{koepke1}). Ordinal Turing machines are a generalisation of \ref{ct3}: they work like standard Turing machines, except their tapes are now $ORD$-length and they can each refer to finitely many ordinals as parameters. 
 
-In any case, it appears that the models of generalised computation introduced hitherto rely very much on the Church-Turing thesis for justification of properness. Such justification usually goes along the lines of,
+In any case, it appears that the models of generalised computation introduced so far rely very much on the Church-Turing thesis for justification of properness. Such justification usually goes along the lines of,
 \begin{quote}
     \emph{since $X$ nicely generalises a model among \ref{ct1} to \ref{ct3} and the subject of generalisation is a model of computation by the Church-Turing thesis, $X$ should also be a model of (generalised) computation.}
 \end{quote}
-This kind of arguments often lead to unintuitive definitions insofar as computation is concerned, sometimes to the extent of an apology being issued (e.g. \cite{sackserec}). Indeed, modern intuition of computation has evolved to become rather high-level, and the models which motivated the Church-Turing thesis have been relegated to play the roles of convenient mathematical foundations, instead of anything resembling practical mental models of computation.
+This kind of arguments often lead to unintuitive definitions insofar as computation is concerned, sometimes to the extent of an apology being issued (e.g. \cite{sackserec}). In fact, it can be argued that the said models were formulated with specific properties of relative computability --- instead of intuitiveness --- in mind, to ensure their degrees of computability are equipped with non-trivial structure. 
 
-Disregarding infinitary computation for a moment, perhaps the most celebrated attempt at amalgamating and formalising useful mental models of computations and algorithms, comes alongside a different kind of generalisation of the Church-Turing thesis. In a series of papers (starting with \cite{gurevich}), Gurevich gave (closely related) semantic axiomatisations of abstract algorithms, and showed how these algorithms are captured by sufficiently machine-like models called \textit{abstract state machines}. Abstract state machines were defined by Gurevich himself way back in the 1980s, although more organised literature thereof only became available in the 1990s. A full definition of these machines can be found in e.g. \cite{evolvingalg}.
-
-Going by the semantic abstraction of Gurevich, algorithms far more closely resemble ``high-level'' meta-theoretic representations of Plotkin-style semantics (found e.g. in \cite{plotkin}), than they do anything among \ref{ct1} to \ref{ct3}. That their syntactic counterparts --- the programming languages associated with abstract state machines --- have been adapted for use in fields ranging from software development to systems engineering via (what is now known as) the \textit{ASM method} is testament to the intuitiveness of Gurevich's design. Historical details regarding the ASM method can be found in \cite{borger} and Chapter 9 of \cite{borgerbook}. Having said all that, how well this abstraction is equipped to handle the philosophical demands of computing with infinite sets is yet to be vigorously tested, for its applications have so far been finitary in nature.
-
-In this paper, we adapt Gurevich's \textit{sequential algorithms} for generalised computations. We make well-meaning modifications to his definition along the way, so that even as such algorithms become more encompassing, the growth in their computational power does not contradict our intuition of computation born out of classical computing. In Subsection \ref{ss210}, we see that plainly omitting the \textit{bounded exploration postulate} from the initial definition of sequential algorithms is wholly unsatisfactory from a set-theoretic standpoint. The remainder of Section \ref{sect2} is thus geared towards finding the right properties to endow a generalised sequential algorithm with, properties that can plug the gap left behind by the aforementioned omission. Notable milestones in this search/journey include:
+In this paper, we adapt Gurevich's \textit{sequential algorithms} for generalised computation. In doing so, we bypass the appeal to the Church-Turing thesis, and provide a ``top-down'' counterpart to the typical ``bottom-up'' approach to modelling generalised computation. We make gradual well-meaning modifications to Gurevich's definition, so that even as our algorithms become more encompassing, the growth in their computational power does not contradict our intuition of computation born out of classical computing. In Subsection \ref{ss210}, we see that plainly omitting the \textit{bounded exploration postulate} from the initial definition of sequential algorithms is wholly unsatisfactory from a set-theoretic standpoint. The remainder of Section \ref{sect2} is thus geared towards finding the right properties to endow a generalised sequential algorithm with, properties that can plug the gap left behind by the aforementioned omission. Notable milestones in this search/journey include:
 \begin{itemize}
     \item a very much local, yet infinitary, version of the bounded exploration postulate formulated in Subsection \ref{ss240},
     \item a streamlined method of writing the input and reading the output of a terminating run devised in Subsection \ref{ss250},
     \item the definition of transfinite runs in Subsection \ref{ss270}, accompanied by an argument about the nigh-universality of our method of taking limits, and
     \item the addition of ordinal parameters in Subsection \ref{ss320} for a better behaved relative computability relation.
 \end{itemize}
+
+The result of our elaborate adaptation process is a new model of generalised computation called \textit{generalised sequential algorithms with parameters} (abbreviated as \textit{GSeqAPs}). The first draw of GSeqAPs is that their more structured templates facilitate the design of generalised algorithms, without compromising too much of the intuitiveness in Gurevich's conception. Coupled with an input/output paradigm, GSeqAPs naturally induce a relative computability relation, $\leq^P$, on sets of ordinals. It turns out that $\leq^P$ possesses a particular suite of desirable traits not found in other relative computability relations associated with generalised computation, especially under computational constraints (Table \ref{table3}, as well as the following subsection). This is the second draw of GSeqAPs. 
+
+Towards a generalised analogue of the Church-Turing thesis, we also show that $\leq^P$ coincides with the \textit{relative constructibility} relation (Theorem \ref{thm275}). 
 
 \subsection{Generalisations of (Relative) Computability}\label{subsec22}
 
@@ -164,9 +159,9 @@ It can be argued that a robust model of generalised computation should induce a 
 \begin{enumerate}[leftmargin=40pt, label=(D\arabic*)]
     \item\label{d1} \textit{Universality}: the relation should be defined on all sets of ordinals.
     \item\label{d2} \textit{Transitivity}: the relation should be transitive.
-    \item\label{d3} \textit{Coherence}: if the relative computability of two sets is witnessed under known computational constraints, then the same should be witnessed after lifting these constraints.
+    \item\label{d3} \textit{Coherence}: if the relative computability of two sets is witnessed under reasonable computational constraints, then the same should be witnessed after lifting these constraints.
 \end{enumerate}
-The astute reader might ask, ``should universality in \ref{d1} not require the inclusion of literally all sets in the domain of the relation?'' The truth is, \ref{d1} is phrased this way for convenience of analysis. Note that there is little substantive compromise in this apparently weaker presentation, because every set can be simply encoded into a binary string, according to Proposition \ref{prop22}. We shall assume that the designation of \ref{d2} and \ref{d3} as desiderata is intuitive, if not self-evident. Unsurprisingly, each of the well-known models of generalised computation introduced in the previous subsection induces relative computability relation on sets. We shall examine whether these relations satisfy properties \ref{d1} to \ref{d3}. The next three paragraphs contain an elaboration of our examination, and Tables \ref{table1} and \ref{table2}, a summary of its outcomes.
+Unsurprisingly, each of the well-known models of generalised computation introduced in the previous subsection induces relative computability relation on sets. We shall examine whether these relations satisfy properties \ref{d1} to \ref{d3}. The next three paragraphs contain an elaboration of our examination, and Tables \ref{table1} and \ref{table2}, a summary of its outcomes.
 
 The relative computability relation associated with $\alpha$-recursion, written $\leq_{\alpha}$, is only defined on $\mathcal{P}(\alpha)$, the powerset of $\alpha$. As such, it is not universal. Naively, we can define a universal relation $\leq_A$ by referring to $\leq_{\alpha}$ as $\alpha$ ranges over all \textit{admissible} ordinals: $$A \leq_A B \text{ iff there is } \alpha \text{ for which } A \leq_{\alpha} B \text{.}$$ However, if we interpret $\alpha$ to be a measure of the amount of computational resources available, as is natural, Theodore Slaman's answer in \cite{slaman} tells us $\leq_A$ is doomed to be incoherent. It seems, then, that there is no easy fix to the non-universality of the $\leq_{\alpha}$'s.
 
@@ -174,7 +169,7 @@ On the other hand, the relative computability relation of $E$-recursion, written
 
 Taking a leaf from how classical Turing machines were modified to become classical oracle machines, we can straightforwardly augment ordinal Turing machines with set oracles. This allows one to define a relative computability relation $\preceq_A$ on arbitrary sets in the same way real oracles are used to define the Turing reducibility relation on the reals. In fact, with reference to $\preceq_{\alpha}$ in Definition 19 of \cite{koepke2}, $$A \preceq_A B \text{ iff there is } \alpha \text{ for which } A \preceq_{\alpha} B \text{.}$$ Such a definition is easily seen to be universal and coherent. It is stated in Theorem 20 of \cite{koepke2} that restricting this relative computability relation to subsets of admissible ordinals $\alpha$ may result in a lack of transitivity. We can however verify that $\preceq_{\alpha}$ is transitive whenever $\alpha$ is regular, and in turn, use it to conclude the transitivity of $\preceq_A$.
 
-\begin{table}
+\begin{table}[!ht]
     \caption[Relative computable relations across three major models of generalised computation]{The relative computable relations native to three major models of generalised computation.}
     \label{table1}
     \centering
@@ -188,7 +183,7 @@ Taking a leaf from how classical Turing machines were modified to become classic
     \end{tabular}
 \end{table}
 
-\begin{table}
+\begin{table}[!ht]
     \caption[Comparison of two universal relative computability relations derived from non-universal relations]{Comparison of two universal relative computability relations derived from separate classes of non-universal relations.}
     \label{table2}
     \centering
@@ -202,9 +197,12 @@ Taking a leaf from how classical Turing machines were modified to become classic
     \end{tabular}
 \end{table}
 
-Unlike the previous models of generalised computation, Gurevich's sequential algorithms were not designed with any form of relative computability in mind. In fact, in the name of generality, his definition of an algorithm does not even specify the existence of canonical inputs or outputs, which are typically integral to associating a relative computability relation with a computational model. Further, the lack of specifications for infinite terminating runs, coupled with strong finitary bounds to the sizes of updates, suggests that Gurevich's abstraction might be poorly suited for generalised computation. Thankfully, this turns out not to be the case, once certain enhancements are added to the definition of a sequential algorithm.
-
-The way the notion of sequential algorithms is enhanced results in a new model of generalised computation called \textit{generalised sequential algorithms with parameters} (abbreviated as \textit{GSeqAPs}). The main draw of GSeqAPs is that they possess more concrete guardrails to facilitate generalised computation, compared to the original sequential algorithms, without compromising too much of the latter's intuitiveness. Coupled with an input/output paradigm, GSeqAPs naturally induce a relative computability relation, $\leq^P$, on all sets of ordinals. It turns out that $\leq^P$ coincides with both $\preceq_A$ as well as the \textit{relative constructibility} relation. Unlike $\preceq_A$ though, $\leq^P$ tends very much to remain transitive under computational constraints. This makes for interesting comparisons between $\leq^P$ and say, the relations in Table \ref{table1}, when size limitations are imposed.
+Like $\preceq_A$, the relative computability relation associated with GSeqAPs, $\leq^P$, also fulfils desiderata \ref{d1} to \ref{d3}. What makes $\leq^P$ stand out is that unlike $\preceq_A$, it tends very much to remain transitive under computational constraints. More precisely, for all admissible ordinals $\alpha$, both
+\begin{itemize}
+    \item $\leq^P_{\alpha}$, the restriction of $\leq^P$ to computations requiring $\alpha$-sized space, and
+    \item $\leq^{P, s}_{\alpha}$, the restriction of $\leq^P$ to computations requiring $\alpha$-sized space and terminating in $< \alpha$-many time steps,
+\end{itemize}
+are at once, transitive and coherent (Propositions \ref{prop251}, \ref{prop252}, \ref{prop270n} and \ref{prop271n}). It is interesting to note that our formulation of GSeqAPs, in accordance to Gurevich's principles of inclusiveness and intuitiveness espoused in \cite{gurevich}, inadvertently gives rise to a series of novel, non-trivial and well-behaved relative computability relations. 
 
 \section{Adapting Sequential Algorithms for the Infinite}\label{sect2}
 
