@@ -551,6 +551,37 @@
       \field{volume}{2}
       \field{year}{2017}
     \endentry
+    \entry{slaman}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=1109cde7f649f549146b6a5fe0dfcc91}{%
+           family={(https://mathoverflow.net/users/31026/theodore-slaman)},
+           familyi={(\bibinithyphendelim s\bibinitperiod},
+           given={Theodore\bibnamedelima Slaman},
+           giveni={T\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{1109cde7f649f549146b6a5fe0dfcc91}
+      \strng{fullhash}{1109cde7f649f549146b6a5fe0dfcc91}
+      \strng{fullhashraw}{1109cde7f649f549146b6a5fe0dfcc91}
+      \strng{bibnamehash}{1109cde7f649f549146b6a5fe0dfcc91}
+      \strng{authorbibnamehash}{1109cde7f649f549146b6a5fe0dfcc91}
+      \strng{authornamehash}{1109cde7f649f549146b6a5fe0dfcc91}
+      \strng{authorfullhash}{1109cde7f649f549146b6a5fe0dfcc91}
+      \strng{authorfullhashraw}{1109cde7f649f549146b6a5fe0dfcc91}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{MathOverflow}
+      \field{note}{(version: 2024-03-07)}
+      \field{title}{Does $A \leq_{\alpha} B$ imply $A \leq_{\beta} B$ for admissible ordinals $\alpha < \beta$?}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://mathoverflow.net/q/466596
+      \endverb
+      \verb{url}
+      \verb https://mathoverflow.net/q/466596
+      \endverb
+    \endentry
     \entry{myself}{misc}{}{}
       \name{author}{1}{}{%
         {{hash=c312cbf964a9f81bebf7230c6637a56b}{%
@@ -577,36 +608,6 @@
       \field{year}{2024}
       \verb{eprint}
       \verb 2402.01213
-      \endverb
-    \endentry
-    \entry{slaman}{misc}{}{}
-      \name{author}{1}{}{%
-        {{hash=1a00feeb646a4050a84813e081c685a9}{%
-           family={(https://mathoverflow.net/users/29231/zoorado)},
-           familyi={(\bibinitperiod},
-           given={Zoorado},
-           giveni={Z\bibinitperiod}}}%
-      }
-      \strng{namehash}{1a00feeb646a4050a84813e081c685a9}
-      \strng{fullhash}{1a00feeb646a4050a84813e081c685a9}
-      \strng{fullhashraw}{1a00feeb646a4050a84813e081c685a9}
-      \strng{bibnamehash}{1a00feeb646a4050a84813e081c685a9}
-      \strng{authorbibnamehash}{1a00feeb646a4050a84813e081c685a9}
-      \strng{authornamehash}{1a00feeb646a4050a84813e081c685a9}
-      \strng{authorfullhash}{1a00feeb646a4050a84813e081c685a9}
-      \strng{authorfullhashraw}{1a00feeb646a4050a84813e081c685a9}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{MathOverflow}
-      \field{note}{(version: 2024-02-17)}
-      \field{title}{Does $A \leq_{\alpha} B$ imply $A \leq_{\beta} B$ for admissible ordinals $\alpha$ [and] $\beta$?}
-      \verb{urlraw}
-      \verb https://mathoverflow.net/q/464328
-      \endverb
-      \verb{url}
-      \verb https://mathoverflow.net/q/464328
       \endverb
     \endentry
   \enddatalist
