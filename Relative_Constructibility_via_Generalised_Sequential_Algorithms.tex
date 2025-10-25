@@ -1685,11 +1685,11 @@ Let us now turn our attention to the bounded relations $\leq^{P, s}_{\alpha}$ an
 \begin{equation*}
     \leq_{\alpha} \ \subset \ \leq_{w \alpha} \ \subset \ \preceq_{\alpha}
 \end{equation*}
-for any admissible ordinal $\alpha$, and the inclusions cannot be reversed in general. By Fact \ref{fact272} and Lemma \ref{lem273}, we have
+for any admissible ordinal $\alpha$, and the inclusions cannot be reversed in general. By Proposition \ref{prop270}, Fact \ref{fact272} and Lemma \ref{lem273}, we have
 \begin{equation}\label{eq2}
-    \leq_{\alpha} \ \subset \ \leq_{w \alpha} \ \subset \ \preceq_{\alpha} \ \subset \ \leq^P_{\alpha}
+    \leq_{\alpha} \ \subset \ \leq_{w \alpha} \ \subset \ \preceq_{\alpha} \ \subset \ \leq^{P, s}_{\alpha} \ \subset \ \leq^P_{\alpha}
 \end{equation}
-for admissible ordinals $\alpha$. The last inclusion cannot be reversed in general because $\leq^P_{\alpha}$ is transitive for all admissible $\alpha$ but $\preceq_{\alpha}$ is not. On the other hand, it is clear that $\leq^{P, s}_{\alpha} \ \subset \ \leq^P_{\alpha}$ for all limit $\alpha$, and the reverse is not true due to Lemmas \ref{lem269} and \ref{lem273}. Further, for admissible $\alpha$, $\leq_{w \alpha} \ \neq \ \leq^{P, s}_{\alpha} \ \neq \ \preceq_{\alpha}$ in general because $\leq^{P, s}_{\alpha}$ is transitive unlike the other two relations. We know $\leq^{P, s}_{\alpha} \ \neq \ \leq_{\alpha}$ in general because $\leq^{P, s}_{\alpha}$ is upward consistent in the sense of Proposition \ref{prop252}, but $\leq_{\alpha}$ is not by Theodore Slaman's answer in \cite{slaman}. 
+for admissible ordinals $\alpha$. The penultimate inclusion cannot be reversed in general because $\leq^{P, s}_{\alpha}$ is transitive for all admissible $\alpha$ but $\preceq_{\alpha}$ is not. Incidentally, this means there exists some (necessarily singular) admissible $\alpha$ and $A, B \subset \alpha$ such that $B \leq^{P, s}_{\alpha} A$ and $B \not\in \mathbf{\Delta_1}(L_{\alpha}[A])$. That the last inclusion cannot be reversed is due to Lemmas \ref{lem269} and \ref{lem273}. 
 
 Table \ref{table3} summarises the similarities and differences among the relations $\leq^{P, s}_{\alpha}$, $\leq^P_{\alpha}$, $\leq_{\alpha}$ and $\preceq_{\alpha}$. When we say a relation possesses the property of ``oracle-analogue'', we mean that the definition of said relation depends on --- or makes reference to --- some object analogous to the oracle in the definition of classical oracle machines.
 
@@ -1709,11 +1709,11 @@ Table \ref{table3} summarises the similarities and differences among the relatio
 \end{table}
 
 \begin{ques}
-Is the set 
-\begin{equation*}
-    \{\leq_{\alpha}, \leq_{w \alpha}, \preceq_{\alpha}, \leq^{P, s}_{\alpha}\}
-\end{equation*}
-linearly ordered by inclusion, for all admissible $\alpha$?
+\leavevmode
+\begin{enumerate}[label=(\arabic*)]
+    \item How inclusive can $\leq^{P, s}_{\alpha}$ be with respect to complexity classes relativised over $L_{\alpha}$, for an admissible ordinal $\alpha$? For example, is there one such $\alpha$ for which $B \leq^{P, s}_{\alpha} A$ whenever $B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$?
+    \item Does $\leq^{P}_{\alpha}$ correspond nicely to some complexity class relativised over $L_{\alpha}$, for all admissible ordinals $\alpha$? If not, how inclusive can it be?
+\end{enumerate}
 \end{ques}
 
 \section{References}
