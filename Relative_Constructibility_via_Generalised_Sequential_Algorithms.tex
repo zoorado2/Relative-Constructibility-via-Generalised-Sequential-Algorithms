@@ -590,7 +590,7 @@ With the aforementioned flaws to \ref{def217} in mind, we seek to reformulate th
 \begin{defi}\label{def220}
 Let $\sigma$ be a signature. We say a sentence $\phi$ over $2 \cdot \sigma$ is \emph{bounded for} $\sigma$ iff for each $\ulcorner X \urcorner \in \sigma$ there are $\phi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner X \urcorner}$ such that
 \begin{enumerate}[label=(\alph*)]
-    \item $\phi^{\ulcorner X \urcorner}$ is a formula over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma\}$ ($\subset 2 \cdot \sigma$),
+    \item  $\phi^{\ulcorner X \urcorner}$ is a $\Delta_0$ formula in the L\'{e}vy hierarchy over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma\}$ ($\subset 2 \cdot \sigma$),
     \item $\psi^{\ulcorner X \urcorner}$ is a sentence over $2 \cdot \sigma$,
     \item if $\ulcorner X \urcorner$ is an $n$-ary function symbol, then 
     \begin{itemize}[label=$\circ$, leftmargin=20pt]
@@ -892,7 +892,7 @@ Let $\mathfrak{M}$ be a GSeqA. Then the following are absolute for transitive mo
 Now that GSeqAs have been officially defined, it is imperative to revisit Example \ref{ex212}, for any notion of generalised algorithm that cannot represent an arbitrary Turing cannot be too useful.
 
 \begin{ex}[\ref{ex212} revisited]\label{ex228}
-Let us describe changes to the $\mathfrak{M}$ defined in Example \ref{ex212} that would qualify it as a GSeqA. First, an observation: there are formulas $\phi_P$ and $\phi_S$ over $\ulcorner \in \urcorner$, each with two free variables $x$ and $y$, such that for all $s \in S(\mathfrak{M})$,
+Let us describe changes to the $\mathfrak{M}$ defined in Example \ref{ex212} that would qualify it as a GSeqA. First, an observation: there are $\Delta_0$ formulas $\phi_P$ and $\phi_S$ over $\ulcorner \in \urcorner$, each with two free variables $x$ and $y$, such that for all $s \in S(\mathfrak{M})$,
 \begin{equation*}
     s \models \forall x \ \forall y \ ((\mathrm{Pre}(x) = y \iff \phi_P(x, y)) \wedge (\mathrm{Suc}(x) = y \iff \phi_S(x, y))) \text{.}
 \end{equation*}
@@ -968,15 +968,15 @@ Let $\mathfrak{M}$ be a GSeqA and $Sq$ be a function from some ordinal into $S(\
 \end{defi}
 
 \begin{defi}
-Let $\mathfrak{M}$ be a GSeqA. Given $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ an $n$-ary function symbol, we say $\phi$ is a \emph{simple limit formula for} $(\ulcorner X \urcorner, \mathfrak{M})$ iff $\phi$ is a formula over $\{\ulcorner \in \urcorner, \ulcorner R^{\ulcorner X \urcorner} \urcorner\}$ with free variables $x_1, \dots, x_{n+1}$.
+Let $\mathfrak{M}$ be a GSeqA and $\ulcorner \mathrm{dom} \urcorner$ be a constant symbol. Given $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ an $n$-ary function symbol, we say $\phi$ is a \emph{simple limit formula for} $(\ulcorner X \urcorner, \mathfrak{M})$ iff $\phi$ is a $\Delta_0$ formula in the L\'{e}vy hierarchy over $$\{\ulcorner \in \urcorner, \ulcorner R^{\ulcorner X \urcorner} \urcorner, \ulcorner \mathrm{dom} \urcorner\}$$ with free variables $x_1, \dots, x_{n+1}$.
 \end{defi}
 
 \begin{defi}\label{def234c}
-Let $\mathfrak{M}$ be a GSeqA. Given $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ an $n$-ary function symbol and $\phi$ a \emph{simple limit formula for} $(\ulcorner X \urcorner, \mathfrak{M})$, we say $\phi$ \emph{preserves ordinal limits} iff interpreting $\ulcorner \in \urcorner$ as $\in$ and $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ as $R_{Sq}^{\ulcorner X \urcorner}$, 
+Let $\mathfrak{M}$ be a GSeqA. Given $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ an $n$-ary function symbol and $\phi$ a \emph{simple limit formula for} $(\ulcorner X \urcorner, \mathfrak{M})$, we say $\phi$ \emph{preserves ordinal limits} iff for all functions $Sq$ from a limit ordinal $< \kappa(\mathfrak{M})$ into $S(\mathfrak{M})$, interpreting $\ulcorner \in \urcorner$ as $\in$, $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ as $R_{Sq}^{\ulcorner X \urcorner}$ and $\ulcorner \mathrm{dom} \urcorner$ as $dom(Sq)$, 
 \begin{equation*}
-    (\kappa(\mathfrak{M}); \in, R_{Sq}^{\ulcorner X \urcorner}) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
+    (\kappa(\mathfrak{M}); \in, R_{Sq}^{\ulcorner X \urcorner}, dom(Sq)) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
 \end{equation*}
-for all functions $Sq$ from a limit ordinal $< \kappa(\mathfrak{M})$ into $S(\mathfrak{M})$ and all $(\alpha_1, \dots, \alpha_{n+1}) \in \kappa(\mathfrak{M})^{n+1}$ such that 
+whenever $(\alpha_1, \dots, \alpha_{n+1}) \in \kappa(\mathfrak{M})^{n+1}$ such that 
 \begin{equation*}
     \alpha_{n+1} = lim \{(\beta, \ulcorner X \urcorner^{Sq(\beta)}(\alpha_1, \dots, \alpha_n)) : \beta < dom(Sq)\} \text{.}
 \end{equation*}
@@ -984,9 +984,10 @@ for all functions $Sq$ from a limit ordinal $< \kappa(\mathfrak{M})$ into $S(\ma
 
 \begin{defi}\label{def234}
 Let $\mathfrak{M}$ be a GSeqA and $Sq$ be a function from a limit ordinal $< \kappa(\mathfrak{M})$ into $S(\mathfrak{M})$. A state $s \in S(\mathfrak{M})$ is a \emph{simple limit of} $Sq$ iff for each $n$-ary function symbol $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ there is a simple limit formula $\phi_{lim}^{\ulcorner X \urcorner}$ for $(\ulcorner X \urcorner, \mathfrak{M})$ such that, interpreting $\ulcorner \in \urcorner$ as $\in$ and $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ as $R_{Sq}^{\ulcorner X \urcorner}$, 
-\begin{equation*}
-    \ulcorner X \urcorner^s (\alpha_1, \dots, \alpha_n) = \alpha_{n+1} \iff (\kappa(\mathfrak{M}); \in, R_{Sq}^{\ulcorner X \urcorner}) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
-\end{equation*}
+\begin{align*}
+    & \ulcorner X \urcorner^s (\alpha_1, \dots, \alpha_n) = \alpha_{n+1} \iff \\
+    & (\kappa(\mathfrak{M}); \in, R_{Sq}^{\ulcorner X \urcorner}, dom(Sq)) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
+\end{align*}
 whenever $(\alpha_1, \dots, \alpha_{n+1}) \in \kappa(\mathfrak{M})^{n+1}$. In this case, we say $\{\phi_{lim}^{\ulcorner X \urcorner} : \ulcorner X \urcorner \in \sigma(\mathfrak{M})\}$ \emph{witnesses} $s$ \emph{is a simple limit of} $Sq$.
 \end{defi}
 
@@ -1009,7 +1010,7 @@ By the definition of a GSeqA and the observation that
 \begin{equation*}
     lim \ inf (T) = lim (T)
 \end{equation*}
-whenever $T$ is a function from some ordinal in $ORD$ and $lim (T)$ exists. The reader should check that the $lim \ inf$ values specified by the proposition relative to $\ulcorner X \urcorner$ and $Sq$, in case they exist, are definable over $(\kappa(\mathfrak{M}); \in, R_{Sq}^{\ulcorner X \urcorner})$. In fact, there is one such definition that depends only on $\ulcorner X \urcorner$ and not on $\mathfrak{M}$.
+whenever $T$ is a function from some ordinal in $ORD$ and $lim (T)$ exists. The reader should check that the $lim \ inf$ values specified by the proposition relative to $\ulcorner X \urcorner$ and $Sq$, in case they exist, are $\Delta_0$ definable over $(\kappa(\mathfrak{M}); \in, R_{Sq}^{\ulcorner X \urcorner}, dom(Sq))$. In fact, there is one such definition that depends only on $\ulcorner X \urcorner$ and not on $\mathfrak{M}$.
 \end{proof}
 
 Colloquially, Proposition \ref{prop233} tells us that every GSeqA is \emph{strongly closed under limit inferiors}. The following definitions generalise this concept.
@@ -1084,7 +1085,7 @@ Let $\mathfrak{M}'$ and $Z$ be as given by the proposition. We need to define $\
     \sigma(\mathfrak{M}^*) := \sigma' \\
     \kappa(\mathfrak{M}^*) := \kappa \text{.}
 \end{gather*}
-But this means $S(\mathfrak{M}^*) = S(\mathfrak{M}')$, so $\mathfrak{M}^*$ is strongly closed under $Z$. We briefly describe the default ``non-tape'' configuration and the transition function of $\mathfrak{M}^*$. 
+But this means $S(\mathfrak{M}^*) = S(\mathfrak{M}')$, so $\mathfrak{M}^*$ is strongly closed under $Z$. We briefly describe the default ``non-tape'' configuration and the transition function of $\mathfrak{M}^*$. As would become routine, the reader should check that these correspond to some valid formulas $\phi^d_{\mathfrak{M^*}}$ and $\phi^{\tau}_{\mathfrak{M^*}}$ respectively.
 
 The symbols in $\sigma(\mathfrak{M})$ have default interpretations following $\mathfrak{M}$. For all $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$, the default interpretation of $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ is the empty set. The two extra constant symbols $\ulcorner c_0 \urcorner$ and $\ulcorner c_1 \urcorner$ default to $0$ and $1$ respectively. 
 
@@ -1195,11 +1196,11 @@ Checking that $\mathfrak{M}^*$ fulfils our requirement is straightforward.
 It makes sense that a machine is more powerful when endowed with more space. This might not quite be the case for GSeqAs, but we can get close to this sort of monotonicity with a mild assumption.
 
 \begin{prop}\label{prop246}
-Suppose $\kappa, \kappa'$ are limit ordinals, $\kappa < \kappa'$, $A \leq^C_{\kappa} B$, and $\kappa$ is definable over the structure $(\kappa'; \in)$. Then $A \leq^C_{\kappa'} B$.
+Suppose $\kappa, \kappa'$ are limit ordinals, $\kappa < \kappa'$, $A \leq^C_{\kappa} B$, and $\kappa$ is $\Delta_0$-definable over the structure $(\kappa'; \in)$. Then $A \leq^C_{\kappa'} B$.
 \end{prop}
 
 \begin{proof}
-Let $\mathfrak{M}$ be a GSeqA witnessing $A \leq^C_{\kappa} B$. Define a GSeqA $\mathfrak{M}'$ with $\kappa(\mathfrak{M}') = \kappa'$ and $\sigma(\mathfrak{M}') = \sigma(\mathfrak{M})$. Since $\kappa$ is definable over $(\kappa'; \in)$, we can relativise both $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ to $\kappa'$ so that if $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ is an $n$-ary function symbol and $\alpha_1, \dots, \alpha_n \in \kappa'$, then 
+Let $\mathfrak{M}$ be a GSeqA witnessing $A \leq^C_{\kappa} B$. Define a GSeqA $\mathfrak{M}'$ with $\kappa(\mathfrak{M}') = \kappa'$ and $\sigma(\mathfrak{M}') = \sigma(\mathfrak{M})$. Since $\kappa$ is $\Delta_0$-definable over $(\kappa'; \in)$, we can relativise both $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ to $\kappa'$ so that if $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ is an $n$-ary function symbol and $\alpha_1, \dots, \alpha_n \in \kappa'$, then 
 \begin{enumerate}[label=(\arabic*)]
     \item the default value of $X(\alpha_1, \dots, \alpha_n)$
     \begin{enumerate}[label=(\alph*)]
@@ -1298,7 +1299,7 @@ We modify the construction of $\mathfrak{M}'$ in the proof of Proposition \ref{p
     \vartheta_{\mathfrak{M}'}(\ulcorner c \urcorner) := (\{\kappa\}, 1) \\
     \vartheta_{\mathfrak{M}'}(\ulcorner d \urcorner) := (\kappa', 0) \text{.}
 \end{gather*}
-As there is no way to formulate $\phi^d_{\mathfrak{M}'}$ such that $\ulcorner c \urcorner$ occurs in it, we choose $\phi^d_{\mathfrak{M}'}$ to be any universally valid sentence over $\sigma(\mathfrak{M'})$. For example, setting all return values to $0$ works. Define $\tau_{\mathfrak{M}'}$ as follows. If ``$d = 0$'' in the current state, make use of $c$ to set up the $\sigma(\mathfrak{M})$ portion of the next state according to the relativised version of $\phi^d_{\mathfrak{M}}$, then increment $d$. Otherwise, do nothing to $d$ and modify the $\sigma(\mathfrak{M})$ portion of the next state according to $\phi^{\tau}_{\mathfrak{M}}$ relativised to $c$. The $\mathfrak{M}'$ defined thus witnesses $A \leq^P_{\kappa'} B$.
+As there is no way to formulate $\phi^d_{\mathfrak{M}'}$ such that $\ulcorner c \urcorner$ occurs in it, we choose $\phi^d_{\mathfrak{M}'}$ to be any universally valid sentence over $\sigma(\mathfrak{M'})$. For example, setting all return values to $0$ works. Define $\tau_{\mathfrak{M}'}$ as follows. If ``$d = 0$'' in the current state, make use of $c$ to set up the $\sigma(\mathfrak{M})$ portion of the next state according to the relativised version of $\phi^{\tau}_{\mathfrak{M}}$, then increment $d$. Otherwise, do nothing to $d$ and modify the $\sigma(\mathfrak{M})$ portion of the next state according to $\phi^{\tau}_{\mathfrak{M}}$ relativised to $c$. The $\mathfrak{M}'$ defined thus witnesses $A \leq^P_{\kappa'} B$.
 \end{proof}
 
 \begin{rem}\label{rem256}
@@ -1318,15 +1319,15 @@ Proposition \ref{prop252}, the transitivity of $\leq^P$, and the nice relationsh
 We are now able to solidify our case for using point-wise limit inferiors, whenever they exist, to compute limit states of terminating runs which are not short. Let us first generalise the concepts of ordinal limits preservation and simple limit states (Definitions \ref{def234c} and \ref{def234}) to GSeqAPs and sequences of arbitrary lengths.
 
 \begin{defi}\label{257c}
-Let $\mathfrak{M}$ be a GSeqAP. Given $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ an $n$-ary function symbol and $\phi$ a \emph{simple limit formula for} $(\ulcorner X \urcorner, \mathfrak{M})$, we say $\phi$ \emph{preserves ordinal limits} iff interpreting $\ulcorner \in \urcorner$ as $\in$ and $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ as $R_{Sq}^{\ulcorner X \urcorner}$, 
+Let $\mathfrak{M}$ be a GSeqAP. Given $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ an $n$-ary function symbol and $\phi$ a \emph{simple limit formula for} $(\ulcorner X \urcorner, \mathfrak{M})$, we say $\phi$ \emph{preserves ordinal limits} iff for all functions $Sq$ from a limit ordinal into $S(\mathfrak{M})$ and all limit ordinals 
 \begin{equation*}
-    (\lambda; \in, R_{Sq}^{\ulcorner X \urcorner}) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
+    \lambda \geq max\{\kappa(\mathfrak{M}), dom(Sq)\} \text{,}
 \end{equation*}
-for all functions $Sq$ from a limit ordinal into $S(\mathfrak{M})$, all limit ordinals 
+interpreting $\ulcorner \in \urcorner$ as $\in$, $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ as $R_{Sq}^{\ulcorner X \urcorner}$ and $\ulcorner dom \urcorner$ as $dom(Sq)$, 
 \begin{equation*}
-    \lambda \geq max\{\kappa(\mathfrak{M}), dom(Sq)\}
+    (\lambda; \in, R_{Sq}^{\ulcorner X \urcorner}, dom(Sq)) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
 \end{equation*}
-and all $(\alpha_1, \dots, \alpha_{n+1}) \in \kappa(\mathfrak{M})^{n+1}$ such that 
+whenever $(\alpha_1, \dots, \alpha_{n+1}) \in \kappa(\mathfrak{M})^{n+1}$ such that 
 \begin{equation*}
     \alpha_{n+1} = lim \{(\beta, \ulcorner X \urcorner^{Sq(\beta)}(\alpha_1, \dots, \alpha_n)) : \beta < dom(Sq)\} \text{.}
 \end{equation*}
@@ -1334,9 +1335,10 @@ and all $(\alpha_1, \dots, \alpha_{n+1}) \in \kappa(\mathfrak{M})^{n+1}$ such th
 
 \begin{defi}\label{def256}
 Let $\mathfrak{M}$ be a GSeqAP and $Sq$ be a function from a limit ordinal into $S(\mathfrak{M})$. A state $s \in S(\mathfrak{M})$ is a \emph{simple limit of} $Sq$ iff for each $n$-ary function symbol $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ there is a simple limit formula $\phi_{lim}^{\ulcorner X \urcorner}$ for $(\ulcorner X \urcorner, \mathfrak{M})$ such that, interpreting $\ulcorner \in \urcorner$ as $\in$ and $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ as $R_{Sq}^{\ulcorner X \urcorner}$, 
-\begin{equation*}
-    \ulcorner X \urcorner^s (\alpha_1, \dots, \alpha_n) = \alpha_{n+1} \iff (\lambda; \in, R_{Sq}^{\ulcorner X \urcorner}) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
-\end{equation*}
+\begin{align*}
+    & \ulcorner X \urcorner^s (\alpha_1, \dots, \alpha_n) = \alpha_{n+1} \iff \\
+    & (\lambda; \in, R_{Sq}^{\ulcorner X \urcorner}, dom(Sq)) \models \phi[x_1 \mapsto \alpha_1, \dots, x_{n+1} \mapsto \alpha_{n+1}]
+\end{align*}
 whenever $\lambda$ is a limit ordinal $\geq max\{\kappa(\mathfrak{M}), dom(Sq)\}$ and $(\alpha_1, \dots, \alpha_{n+1}) \in \kappa(\mathfrak{M})^{n+1}$. In this case, we say $\{\phi_{lim}^{\ulcorner X \urcorner} : \ulcorner X \urcorner \in \sigma(\mathfrak{M})\}$ \emph{witnesses} $s$ \emph{is a simple limit of} $Sq$.
 \end{defi}
 
@@ -1536,9 +1538,10 @@ Let $B \leq^{P, s}_{\kappa} A$ for some regular ordinal $\kappa$. Then $B \in \m
 \end{lem}
 
 \begin{proof}
-Let $\mathfrak{M}$ be a GSeqAP with parameter set $K$ witnessing $B \leq^{P, s}_{\kappa} A$, and $Sq$ be a short terminating run of $\mathfrak{M}$ with input $A$ and output $B$. Suppose we want to find out whether some $\beta < \kappa$ is a member of $B$. To do so, we draw up a dependency tree of terms of which interpretations among members of $ran(Sq)$ are needed to decide if $\beta \in B$. This tree is finitely branching by the bounded exploration postulate, and it has number of levels no more than $dom(Sq)$. By the regularity of $\kappa$, it has size $< \kappa$. 
+Let $\mathfrak{M}$ be a GSeqAP with parameter set $K$ witnessing $B \leq^{P, s}_{\kappa} A$, and $Sq$ be a short terminating run of $\mathfrak{M}$ with input $A$ and output $B$. Suppose we want to find out whether some $\beta < \kappa$ is a member of $B$. To do so, we draw up the dependency tree of terms of which interpretations among members of $ran(Sq)$ are needed to decide if $\beta \in B$. 
+This tree is finitely branching by the bounded exploration postulate, and it has number of levels no more than $dom(Sq)$. By the regularity of $\kappa$, it has size $< \kappa$. 
 
-Now, the statement $x \in B$ is semantically equivalent over $V$ to a $\Sigma_1$ formula with free variable $x$ and parameters among $K \cup \{dom(Sq)\}$ saying that such a (unique) tree of terms and interpretations exist. The construction of said tree, due to its simplicity, can be carried out correctly in $L[A]$ through transfinite recursion. Moreover, $L[A]$ recognises the tree has size $< \kappa$, so indeed $B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
+Now, the statement $x \in B$ is semantically equivalent over $V$ to a $\Sigma_1$ formula with free variable $x$ and parameters among $K \cup \{dom(Sq)\}$ saying that such a (unique) tree of terms and interpretations exist. The construction of said tree can be carried out correctly in $L_{\kappa}[A]$ through transfinite recursion, because each node in the tree is $\Delta_0$-definable from its finitely many dependents, and because taking limit inferiors is absolute between $L_{\kappa}[A]$ and $V$. Moreover, $L_{\kappa}[A]$ recognises the tree is set-sized, so indeed $B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
 
 We can define a GSeqAP $\mathfrak{M}'$ that copies what $\mathfrak{M}$ does on each input until $\mathfrak{M}$ terminates, and flips every bit of the output tape thereafter. Now $\mathfrak{M}'$ witnesses $\kappa \setminus B \leq^{P, s}_{\kappa} A$, so by the argument in the preceding paragraph we have $\kappa \setminus B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
 \end{proof}
