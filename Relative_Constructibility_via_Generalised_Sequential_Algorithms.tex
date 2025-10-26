@@ -1452,24 +1452,24 @@ An ordinal $\alpha$ is \emph{admissible} iff $L_{\alpha} \models \mathsf{KP}$.
 
 An admissible ordinal has reasonably strong closure properties. For example, it is closed under ordinal addition, multiplication and exponentiation.
 
-We require the concept of $\kappa$-computability with short runs for an upcoming lemma.
+We require the concept of $\alpha$-computability with short runs for an upcoming lemma.
 
 \begin{defi}\label{def269p}
-Let $\kappa$ be a limit ordinal. We say $B$ is $\kappa$\emph{-computable with parameters from} $A$ \emph{with short runs}, or $B \leq^{P, s}_{\kappa} A$, if there is a GSeqAP $\mathfrak{M}$ witnessing $B \leq^P_{\kappa} A$ and a short terminating run of $\mathfrak{M}$ with input $A$ and output $B$. Here, $\mathfrak{M}$ is said to witness $B \leq^{P, s}_{\kappa} A$.
+Let $\alpha$ be a limit ordinal. We say $B$ is $\alpha$\emph{-computable with parameters from} $A$ \emph{with short runs}, or $B \leq^{P, s}_{\alpha} A$, if there is a GSeqAP $\mathfrak{M}$ witnessing $B \leq^P_{\alpha} A$ and a short terminating run of $\mathfrak{M}$ with input $A$ and output $B$. Here, $\mathfrak{M}$ is said to witness $B \leq^{P, s}_{\alpha} A$.
 \end{defi}
 
-Unsurprisingly, we have $\leq^{P, s}_{\kappa}$-analogues of Propositions \ref{prop251} and \ref{prop252}.
+Unsurprisingly, we have $\leq^{P, s}_{\alpha}$-analogues of Propositions \ref{prop251} and \ref{prop252}.
 
 \begin{prop}\label{prop270n}
-Let $\kappa$ be an admissible ordinal. Suppose $A \leq^{P, s}_{\kappa} B$ and $B \leq^{P, s}_{\kappa} C$. Then $A \leq^{P, s}_{\kappa} C$.
+Let $\alpha$ be an admissible ordinal. Suppose $A \leq^{P, s}_{\alpha} B$ and $B \leq^{P, s}_{\alpha} C$. Then $A \leq^{P, s}_{\alpha} C$.
 \end{prop}
 
 \begin{proof}
-As in the case of Proposition \ref{prop251}. the proof here is exactly the same as the proof of Proposition \ref{prop245}. We should additionally note that the termination run of $\mathfrak{M}^*$ --- as in the proof of Proposition \ref{prop245} --- with input $A$ and output $C$ is still short because it combines two short runs and $\kappa$ is closed under ordinal addition.
+As in the case of Proposition \ref{prop251}. the proof here is exactly the same as the proof of Proposition \ref{prop245}. We should additionally note that the termination run of $\mathfrak{M}^*$ --- as in the proof of Proposition \ref{prop245} --- with input $A$ and output $C$ is still short because it combines two short runs and $\alpha$ is closed under ordinal addition.
 \end{proof}
 
 \begin{prop}\label{prop271n}
-Suppose $\kappa, \kappa'$ are admissible ordinals, $\kappa < \kappa'$ and $A \leq^{P, s}_{\kappa} B$. Then $A \leq^{P, s}_{\kappa'} B$.
+Suppose $\alpha, \alpha'$ are admissible ordinals, $\alpha < \alpha'$ and $A \leq^{P, s}_{\alpha} B$. Then $A \leq^{P, s}_{\alpha'} B$.
 \end{prop}
 
 \begin{proof}
@@ -1479,7 +1479,7 @@ Noting Remark \ref{rem256}, the proof here is exactly the same as the proof of P
 There is a natural follow-up to Definition \ref{def269p}.
 
 \begin{defi}\label{def8329}
-Let $A, B$ be sets of ordinals. We say $B$ is \emph{computable with parameters from} $A$ \emph{with short runs}, or $B \leq^{P, s} A$, iff $B \leq^{P, s}_{\kappa} A$ for some limit ordinal $\kappa$.
+Let $A, B$ be sets of ordinals. We say $B$ is \emph{computable with parameters from} $A$ \emph{with short runs}, or $B \leq^{P, s} A$, iff $B \leq^{P, s}_{\alpha} A$ for some limit ordinal $\alpha$.
 \end{defi}
 
 It so happens that $\leq^P$ and $\leq^{P, s}$ are fundamentally the same.
