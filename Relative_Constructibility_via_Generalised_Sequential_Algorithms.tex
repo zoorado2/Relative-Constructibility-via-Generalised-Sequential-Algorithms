@@ -1566,15 +1566,15 @@ Let $\alpha$ be an admissible ordinal. Then $B$ is $\alpha$-computably enumerabl
 \end{fact}
 
 \begin{lem}\label{lem273}
-Let $B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$ for some admissible ordinal $\kappa$. Then $B \leq^P_{\kappa} A$.
+Let $B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$ for some admissible ordinal $\alpha$. Then $B \leq^P_{\alpha} A$.
 \end{lem}
 
 \begin{proof}
-By Fact \ref{fact272}, $B$ is $\kappa$-computably enumerable in $A$, as witnessed by some $\kappa$-machine $M$. Let $\mathfrak{M}$ be a GSeqAP simulating $M$ as per Proposition \ref{prop270}. We define a GSeqAP $\mathfrak{M}'$ that, when given input $A$, dovetails and runs $M$ through $\mathfrak{M}$ on each input in
+By Fact \ref{fact272}, $B$ is $\alpha$-computably enumerable in $A$, as witnessed by some $\alpha$-machine $M$. Let $\mathfrak{M}$ be a GSeqAP simulating $M$ as per Proposition \ref{prop270}. We define a GSeqAP $\mathfrak{M}'$ that, when given input $A$, dovetails and runs $M$ through $\mathfrak{M}$ on each input in
 \begin{equation*}
-    \{\langle \{\beta\}, A \rangle : \beta < \kappa\}
+    \{\langle \{\beta\}, A \rangle : \beta < \alpha\}
 \end{equation*}
-for arbitrarily many steps $< \kappa$, in order to determine if $M$ halts on said input. In the end, $\mathfrak{M}'$ should consolidate the findings and output them as a subset of $\kappa$.
+for arbitrarily many steps $< \alpha$, in order to determine if $M$ halts on said input. In the end, $\mathfrak{M}'$ should consolidate the findings and output them as a subset of $\alpha$.
 
 More formally, add to $\sigma(\mathfrak{M})$ fresh constant symbols $\ulcorner c_0 \urcorner$, $\ulcorner c_1 \urcorner$, $\ulcorner c_2 \urcorner$, $\ulcorner d \urcorner$ and a fresh unary function symbol $\ulcorner R \urcorner$, and have the result be $\sigma(\mathfrak{M}')$. Set all constants to $0$ and $R$ to be empty by default. We are left to describe the transition function of $\mathfrak{M}'$, which we shall do by cases. In our description, $I$ denotes the input to $\mathfrak{M}'$.
 \begin{enumerate}[leftmargin=60pt, label=Case \arabic*:]
@@ -1583,19 +1583,27 @@ More formally, add to $\sigma(\mathfrak{M})$ fresh constant symbols $\ulcorner c
     \item\label{8340c3} ``$c_0 = 0 \wedge d \neq 0$''. We copy the contents of $R$ to the output tape, before terminating.
     \item\label{8340c4} ``$c_0 \neq 0 \wedge d = 0$''. Just terminate.
 \end{enumerate}
-Every terminating run of $\mathfrak{M}'$ is of length $\kappa + 2$, and if its input is $I$, then its output will be the set
+Every terminating run of $\mathfrak{M}'$ is of length $\alpha + 2$, and if its input is $I$, then its output will be the set
 \begin{equation*}
     \{\beta < \alpha : M \text{ halts on input } \langle \{\beta\}, I \rangle\} \text{.}
 \end{equation*}This is because
 \begin{enumerate}[label=(\arabic*)]
     \item no state where \hyperref[8340c4]{Case 4} applies is reachable from an initial state, so a run can only terminate from an initial state as a consequence of \hyperref[8340c3]{Case 3}, and
-    \item $c_0$ first returns to $0$ in a state other than an initial state after exactly $\kappa + 1$ many steps, at which point $M$ would have been simulated on every input in 
+    \item $c_0$ first returns to $0$ in a state other than an initial state after exactly $\alpha + 1$ many steps, at which point $M$ would have been simulated on every input in 
     \begin{equation*}
-        \{\langle \{\beta\}, I \rangle : \beta < \kappa\}
+        \{\langle \{\beta\}, I \rangle : \beta < \alpha\}
     \end{equation*}
-    for up to arbitrarily many steps $< \kappa$, with all eventual haltings recorded in $R$.
+    for up to arbitrarily many steps $< \alpha$, with all eventual haltings recorded in $R$.
 \end{enumerate}
 In particular, there is a terminating run of $\mathfrak{M}'$ with input $A$ and output $B$, whence $B \leq^P A$.
+\end{proof}
+
+\begin{cor}
+Let $B \in \mathbf{\Pi_1}(L_{\alpha}[A])$ for some admissible ordinal $\alpha$. Then $B \leq^P_{\alpha} A$.
+\end{cor}
+
+\begin{proof}
+We can get $B$ from $\alpha \setminus B$ by bit-flipping, and $\alpha \setminus B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$. By Lemma \ref{lem273}, we are done.
 \end{proof}
 
 Lemmas \ref{lem269} and \ref{lem273} reflect the difference in computability between considering all terminating runs of GSeqAPs and considering only short terminating runs, for regular ordinal tape lengths. In tandem, the lemmas also give us a nice characterisation of the reducibility relation $\leq^P$.
@@ -1605,9 +1613,9 @@ Let $A$ and $B$ be two sets of ordinals. Then $B \leq^P A$ iff $B \in L[A]$.
 \end{thm}
 
 \begin{proof}
-Assume $B \in L[A]$. Then $B \in L_{\kappa}[A]$ for some admissible ordinal $\kappa$. But $L_{\kappa}[A] \subset \mathbf{\Sigma_1}(L_{\kappa}[A])$, so by Lemma \ref{lem273}, $B \leq^P A$. 
+Assume $B \in L[A]$. Then $B \in L_{\alpha}[A]$ for some admissible ordinal $\alpha$. But $L_{\alpha}[A] \subset \mathbf{\Sigma_1}(L_{\alpha}[A])$, so by Lemma \ref{lem273}, $B \leq^P A$. 
 
-Next, assume $B \leq^P A$. Then by Proposition \ref{prop271}, $B \leq^{P, s}_{\kappa} A$ for some regular ordinal $\kappa$. Lemma \ref{lem269} tells us $B \in \mathbf{\Delta_1}(L_{\kappa}[A])$, but $\mathbf{\Delta_1}(L_{\kappa}[A]) \subset L[A]$, so we are done.
+Next, assume $B \leq^P A$. Then by Proposition \ref{prop271}, $B \leq^{P, s}_{\alpha} A$ for some regular ordinal $\alpha$. Lemma \ref{lem269} tells us $B \in \mathbf{\Delta_1}(L_{\alpha}[A])$, but $\mathbf{\Delta_1}(L_{\alpha}[A]) \subset L[A]$, so we are done.
 \end{proof}
 
 \begin{cor}
@@ -1618,7 +1626,7 @@ A set of ordinals $B$ is computable with parameters iff $B \in L$.
 Apply Theorem \ref{thm275} with $\emptyset$ in place of $A$. 
 \end{proof}
 
-\begin{cor}
+\begin{cor}\label{cor8343}
 Let $A$ and $B$ be two sets of ordinals. Then $B \leq^P A$ iff $B \preceq_A A$.
 \end{cor}
 
