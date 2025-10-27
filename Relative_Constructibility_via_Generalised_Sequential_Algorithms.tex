@@ -1528,7 +1528,7 @@ Follows immediately from Proposition \ref{prop270}.
 \end{proof}
 
 \begin{fact}[Koepke, \cite{koepke2}]\label{fact334}
-Let $\alpha$ be an admissible ordinal. Then $B$ is $\alpha$-computable in $A$ iff $B \in \mathbf{\Delta_1}(L_{\alpha}[A])$.
+Let $\alpha$ be an admissible ordinal and $A \subset \alpha$. Then $B$ is $\alpha$-computable in $A$ iff $B \in \mathbf{\Delta_1}(L_{\alpha}[A])$.
 \end{fact}
 
 Recall the following definition referenced in Subsection \ref{subsec22}.
@@ -1548,9 +1548,9 @@ Let $B \leq^{P, s}_{\kappa} A$ for some regular ordinal $\kappa$. Then $B \in \m
 \begin{proof}
 Let $\mathfrak{M}$ be a GSeqAP with parameter set $K$ witnessing $B \leq^{P, s}_{\kappa} A$, and $Sq$ be a short terminating run of $\mathfrak{M}$ with input $A$ and output $B$. Suppose we want to find out whether some $\beta < \kappa$ is a member of $B$. To do so, for the terms required to decide if $\beta \in B$, we simulate how their interpretation changes along $Sq$. This set of terms is finite by the bounded exploration postulate. 
 
-Now, the statement $x \in B$ is semantically equivalent over $V$ to a $\Sigma_1$ formula with free variable $x$ and parameters among $K \cup \{dom(Sq)\}$ saying that a (unique) sequence of length $dom(SQ)$ representing our simulation exists. The construction of said sequence can be carried out correctly in $L_{\kappa}[A]$ through transfinite recursion, because $\Delta_0$ definitions are absolute between $L_{\kappa}[A]$ and $V$. Moreover, since $dom(Sq)  < \kappa$, $L_{\kappa}[A]$ recognises the sequence is set-sized by the regularity of $\kappa$, so indeed $B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
+Now, the statement $x \in B$ is semantically equivalent over $V$ to a $\Sigma_1$ formula with free variable $x$ and parameters among $K \cup \{dom(Sq)\}$ saying that a (unique) sequence representing our simulation exists. The construction of said sequence can be carried out correctly in $L_{\kappa}[A]$ through transfinite recursion, because $\Delta_0$ definitions are absolute between $L_{\kappa}[A]$ and $V$. Moreover, since $dom(Sq)  < \kappa$, $L_{\kappa}[A]$ recognises the sequence is set-sized by the regularity of $\kappa$, so indeed $B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
 
-We can define a GSeqAP $\mathfrak{M}'$ that copies what $\mathfrak{M}$ does on each input until $\mathfrak{M}$ terminates, and flips every bit of the output tape thereafter. Now $\mathfrak{M}'$ witnesses $\kappa \setminus B \leq^{P, s}_{\kappa} A$, so by the argument in the preceding paragraph we have $\kappa \setminus B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
+Suppose $dom(Sq) = \gamma$. Then using $\gamma$ as a parameter, we can define a GSeqAP $\mathfrak{M}'$ that copies what $\mathfrak{M}$ does on each input until $\mathfrak{M}$ terminates, and flips every bit of the output tape thereafter. Now $\mathfrak{M}'$ witnesses $\kappa \setminus B \leq^{P, s}_{\kappa} A$, so by the argument in the preceding paragraph we have $\kappa \setminus B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
 \end{proof}
 
 \begin{defi}[Koepke, \cite{koepke2}]
@@ -1562,11 +1562,11 @@ In this case, $M$ \emph{witnesses} $B$ \emph{is} $\alpha$\emph{-computably enume
 \end{defi}
 
 \begin{fact}[Koepke, \cite{koepke2}]\label{fact272}
-Let $\alpha$ be an admissible ordinal. Then $B$ is $\alpha$-computably enumerable in $A$ iff $B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$.
+Let $\alpha$ be an admissible ordinal and $A \subset \alpha$. Then $B$ is $\alpha$-computably enumerable in $A$ iff $B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$.
 \end{fact}
 
 \begin{lem}\label{lem273}
-Let $B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$ for some admissible ordinal $\alpha$. Then $B \leq^P_{\alpha} A$.
+Let $A \subset \alpha$ and $B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$ for some admissible ordinal $\alpha$. Then $B \leq^P_{\alpha} A$.
 \end{lem}
 
 \begin{proof}
@@ -1599,11 +1599,11 @@ In particular, there is a terminating run of $\mathfrak{M}'$ with input $A$ and 
 \end{proof}
 
 \begin{cor}
-Let $B \in \mathbf{\Pi_1}(L_{\alpha}[A])$ for some admissible ordinal $\alpha$. Then $B \leq^P_{\alpha} A$.
+Let $A \subset \alpha$ and $B \in \mathbf{\Pi_1}(L_{\alpha}[A])$ for some admissible ordinal $\alpha$. Then $B \leq^P_{\alpha} A$.
 \end{cor}
 
 \begin{proof}
-We can get $B$ from $\alpha \setminus B$ by bit-flipping, and $\alpha \setminus B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$. By Lemma \ref{lem273}, we are done.
+That $B \in \mathbf{\Pi_1}(L_{\alpha}[A])$ implies $\alpha \setminus B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$, so let $\mathfrak{M}$ be a GSeqAP witnessing $\alpha \setminus B \leq^P_{\alpha} A$ constructed \textit{a la} the proof of Lemma \ref{lem273}. By modifying the code of $\mathfrak{M}$ such that in \hyperref[8340c3]{Case 3}, we bit-flip the contents of $R$ before copying them to the output tape, we obtain a GSeqAP witnessing $B \leq^P_{\alpha} A$.
 \end{proof}
 
 Lemmas \ref{lem269} and \ref{lem273} reflect the difference in computability between considering all terminating runs of GSeqAPs and considering only short terminating runs, for regular ordinal tape lengths. In tandem, the lemmas also give us a nice characterisation of the reducibility relation $\leq^P$.
