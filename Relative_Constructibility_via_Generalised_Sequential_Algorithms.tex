@@ -1634,26 +1634,20 @@ By Fact \ref{fact272}, $B$ is $\alpha$-computably enumerable in $A$, as witnesse
 \end{equation*}
 for arbitrarily many steps $< \alpha$, in order to determine if $M$ halts on said input. In the end, $\mathfrak{M}'$ should consolidate the findings and output them as a subset of $\alpha$.
 
-More formally, add to $\sigma(\mathfrak{M})$ fresh constant symbols $\ulcorner c_0 \urcorner$, $\ulcorner c_1 \urcorner$, $\ulcorner c_2 \urcorner$, $\ulcorner d \urcorner$ and a fresh unary function symbol $\ulcorner R \urcorner$, and have the result be $\sigma(\mathfrak{M}')$. Set all constants to $0$ and $R$ to be empty by default. We are left to describe the transition function of $\mathfrak{M}'$, which we shall do by cases. In our description, $I$ denotes the input to $\mathfrak{M}'$.
+More formally, add to $\sigma(\mathfrak{M})$ fresh constant symbols $\ulcorner c_0 \urcorner$, $\ulcorner c_1 \urcorner$, $\ulcorner c_2 \urcorner$ and a fresh unary relation symbol $\ulcorner R \urcorner$, and have the result be $\sigma(\mathfrak{M}')$. Initialise all constants other than $c_0$ to $0$, $c_0$ to $1$ and $R$ to be empty. We are left to describe the transition function of $\mathfrak{M}'$, which we shall do by cases. In our description, $I$ denotes the current state of the input tape.
 \begin{enumerate}[leftmargin=60pt, label=Case \arabic*:]
-    \item ``$c_0 = d = 0$''. We increment both $c_0$ and $d$ and set the input tape to display $\langle \emptyset, I \rangle$.
-    \item ``$c_0 \neq 0 \wedge d \neq 0$''. We do the dovetailing. In other words, for each $\beta$ satisfying ``$\neg R(\beta) \wedge \beta \leq c_0$'', we use $\mathfrak{M}$ to simulate $M$ on input $\langle \{\beta\}, I \rangle$ for up to $c_0$ steps, using $c_1$ and $c_2$ to keep track of the counts. At the end of every step in simulation, we check if $\mathfrak{M}$ terminates. If so, we set $R(\beta)$ to \texttt{true} and move on to simulate $M$ on input $\langle \{\beta + 1\}, I \rangle$, if $\beta \neq c_0$. At the end of all the simulations and possible updates to $R$, set $c_1$ and $c_2$ to $0$ and increment $c_0$. The constant $d$ is left unchanged.
-    \item\label{8340c3} ``$c_0 = 0 \wedge d \neq 0$''. We copy the contents of $R$ to the output tape, before terminating.
-    \item\label{8340c4} ``$c_0 \neq 0 \wedge d = 0$''. Just terminate.
+    \item ``$c_0 \neq 0$''. We do the dovetailing iff $c_1$ and $c_2$ compare favourably to $c_0$. By dovetailing we mean the following: for each $\beta$ satisfying ``$\neg R(\beta) \wedge \beta \leq c_0$'', we use $\mathfrak{M}$ to simulate $M$ on input $\langle \{\beta\}, I \rangle$ for up to $c_0$ steps, using $c_1$ and $c_2$ to keep track of the counts. At the end of every step in the simulation, we check if $\mathfrak{M}$ terminates. If so, we set $R(\beta)$ to \texttt{true} and move on to simulate $M$ on input $\langle \{\beta + 1\}, I \rangle$, if $\beta \neq c_0$. At the end of all the simulations and possible updates to $R$, or in the event where no dovetailing occurs, we set $c_1$ and $c_2$ to $0$ and increment $c_0$. 
+    \item\label{8340c3} ``$c_0 = 0$''. We copy the contents of $R$ to the output tape, before terminating.
 \end{enumerate}
 Every terminating run of $\mathfrak{M}'$ is of length $\alpha + 2$, and if its input is $I$, then its output will be the set
 \begin{equation*}
     \{\beta < \alpha : M \text{ halts on input } \langle \{\beta\}, I \rangle\} \text{.}
-\end{equation*}This is because
-\begin{enumerate}[label=(\arabic*)]
-    \item no state where \hyperref[8340c4]{Case 4} applies is reachable from an initial state, so a run can only terminate from an initial state as a consequence of \hyperref[8340c3]{Case 3}, and
-    \item $c_0$ first returns to $0$ in a state other than an initial state after exactly $\alpha + 1$ many steps, at which point $M$ would have been simulated on every input in 
-    \begin{equation*}
-        \{\langle \{\beta\}, I \rangle : \beta < \alpha\}
-    \end{equation*}
-    for up to arbitrarily many steps $< \alpha$, with all eventual haltings recorded in $R$.
-\end{enumerate}
-In particular, there is a terminating run of $\mathfrak{M}'$ with input $A$ and output $B$, whence $B \leq^P A$.
+\end{equation*}
+This is because $c_0$ first reaches $0$ from an initial state after exactly $\alpha + 1$ many steps, at which point $M$ would have been simulated on every input in 
+\begin{equation*}
+    \{\langle \{\beta\}, I \rangle : \beta < \alpha\}
+\end{equation*}
+for up to arbitrarily many steps $< \alpha$, with all eventual haltings recorded in $R$. In particular, there is a terminating run of $\mathfrak{M}'$ with input $A$ and output $B$, whence $B \leq^P A$.
 \end{proof}
 
 \begin{cor}
