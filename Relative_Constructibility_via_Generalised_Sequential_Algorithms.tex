@@ -81,6 +81,7 @@ We modify Gurevich's definition of sequential algorithms, so that it becomes ame
 \newtheorem{conj}[thm]{Conjecture}
 \newtheorem{ques}[thm]{Question}
 \newtheorem*{claim}{Claim}
+\newtheorem{claim2}[thm]{Claim}
 \theoremstyle{definition}
 \newtheorem{defi}[thm]{Definition}
 \theoremstyle{remark}
@@ -631,12 +632,12 @@ A few things are easily verifiable from Definition \ref{def220}. Let $\sigma$, $
         \forall s_0 \in S(\mathfrak{M}) \ \exists ! s_1 \in S(\mathfrak{M}) \ ((s_0, s_1) \models_2 \phi)
     \end{equation*}
     is absolute for transitive models of $\mathsf{ZFC}$ containing $\mathfrak{T}(\mathfrak{M})$.
-    \item In \ref{82161} of Definition \ref{def220}, we require that each atomic formula occurring in $\phi^{\ulcorner X \urcorner}$ contains at most one function symbol to prevent possible unbounded ``searches'' for existential witnesses, since e.g.
+    \item In \ref{82161} of Definition \ref{def220}, we require that each atomic formula occurring in $\phi^{\ulcorner X \urcorner}$ contains at most one function symbol to prevent possible unbounded searches for existential witnesses, as we propagate the evaluation of our next state backwards. For example, the sentences 
     \begin{align*}
         \ulcorner \forall x \ (X_1(x) = Y_1(x) \iff & \ \exists y \ (\phi^{\ulcorner X \urcorner}(x, y) \wedge \phi^{\ulcorner Y \urcorner}(x, y))) \urcorner \text{ and} \\
         \ulcorner \forall x \ (X_1(Y_1(x)) = y \iff & \ \exists z \ (\phi^{\ulcorner X \urcorner}(z, y) \wedge \phi^{\ulcorner Y \urcorner}(x, z))) \urcorner
     \end{align*}
-    are both logically implied by the conjunction of $\psi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner Y \urcorner}$ (see \ref{82163} of Definition \ref{def220}), for any two unary function symbols $\ulcorner X \urcorner, \ulcorner Y \urcorner \in \sigma$.
+    are logically implied by the conjunction of $\psi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner Y \urcorner}$ (see \ref{82163} of Definition \ref{def220}) for any two unary function symbols $\ulcorner X \urcorner, \ulcorner Y \urcorner \in \sigma$, and the unbounded existential quantifiers occurring in them signal the necessity of unbounded exploration in obtaining the truth values of $\ulcorner X_1(x) = Y_1(x) \urcorner$ and $\ulcorner X_1(Y_1(x)) = y \urcorner$.
     \item Suppose $\phi = \phi^{\tau}_{\mathfrak{M}}$ for some SeqA $\mathfrak{M}$. Then in the context of $\mathfrak{M}$, for each $\ulcorner X \urcorner \in \sigma$, the value of the next state's interpretation of $\ulcorner X \urcorner$ at a point depends only on finitely many values of the current state's interpretations of symbols in $\sigma$. Further, any ``search'' done within the current state for the computation of the next state's interpretation is bounded. These agree in spirit with the requirement of bounded exploration, albeit only locally. The caveat of bounded exploration being local is a reasonable --- even expected --- compromise for generalised computation.
 \end{enumerate}
 
@@ -856,14 +857,6 @@ A \emph{generalised sequential algorithm} --- henceforth \textit{GSeqA} --- $\ma
 \end{enumerate}
 In this case, we say $\mathfrak{M} = (\kappa(\mathfrak{M}), \sigma(\mathfrak{M}), \phi^{\tau}_{\mathfrak{M}}, \phi^d_{\mathfrak{M}})$.
 \end{defi}
-
-\begin{prop}
-For any GSeqA $\mathfrak{M}$, $\phi^{\tau}_{\mathfrak{M}}$ can be rewritten as a $\Delta_0$ formula over $\{\ulcorner \in_0 \urcorner\}$.
-\end{prop}
-
-\begin{proof}
-By \ref{8222d5} to \ref{8222d8} of Definition \ref{def224}, as well as the definitions of being bounded and being simple for $\sigma(\mathfrak{M})$. In particular, notice how \ref{simpa} in the definition of being simple for $\sigma(\mathfrak{M})$ combines with \ref{82161} of Definition \ref{def220}.
-\end{proof}
 
 \begin{rem}\label{rem225}
 Fix any limit ordinal $\kappa$. Notice that there are only countably many GSeqAs $\mathfrak{M}$ satisfying $\kappa(\mathfrak{M}) = \kappa$. Indeed, this countable set of GSeqAs specifications is absolute for transitive models of $\mathsf{ZFC}$ containing $\kappa$.
@@ -1197,14 +1190,57 @@ Let $\kappa$ be a limit ordinal. Suppose $A \leq^C_{\kappa} B$ and $B \leq^C_{\k
 \end{prop}
 
 \begin{proof}
-Let $\mathfrak{M}_1$ witness $B \leq^C_{\kappa} C$ and $\mathfrak{M}_2$ witness $A \leq^C_{\kappa} B$. We shall construct a GSeqA $\mathfrak{M}^*$ with $\kappa(\mathfrak{M}^*) = \kappa$ that essentially simulates $\mathfrak{M}_1$ followed by $\mathfrak{M}_2$, so that $\mathfrak{M}^*$ witnesses $A \leq^C_{\kappa} C$. Set $\sigma(\mathfrak{M}^*)$ to be a disjoint union of $\sigma(\mathfrak{M}_1)$ and $\sigma(\mathfrak{M}_2)$, and 
+Let $\mathfrak{M}_1$ witness $B \leq^C_{\kappa} C$ and $\mathfrak{M}_2$ witness $A \leq^C_{\kappa} B$. We shall construct a GSeqA $\mathfrak{M}^*$ with $\kappa(\mathfrak{M}^*) = \kappa$ that essentially simulates $\mathfrak{M}_1$ followed by $\mathfrak{M}_2$, so that $\mathfrak{M}^*$ witnesses $A \leq^C_{\kappa} C$. Set $\sigma(\mathfrak{M}^*)$ to be a disjoint union of $\sigma(\mathfrak{M}_1)$ and $\sigma(\mathfrak{M}_2)$ plus an additional constant symbol $\ulcorner c \urcorner$, and 
 \begin{equation*}
-    \phi^d_{\mathfrak{M}^*} := \phi^d_{\mathfrak{M}_1} \wedge \phi^d_{\mathfrak{M}_2} \text{.}
+    \phi^d_{\mathfrak{M}^*} := \phi^d_{\mathfrak{M}_1} \wedge \phi^d_{\mathfrak{M}_2} \wedge \ulcorner c = \langle 1 \rangle \urcorner \text{.}
+\end{equation*}
+For each $\ulcorner X \urcorner \in \sigma(\mathfrak{M}_1)$, define a formula $\varphi^{\ulcorner X \urcorner}$ over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma(\mathfrak{M}_1)\}$ with one free variable as follows:
+\begin{enumerate}[label=(\alph*)]
+    \item if $\ulcorner X \urcorner$ is an $n$-ary function symbol, then 
+    \begin{align*}
+        \varphi^{\ulcorner X \urcorner}(x) := \ulcorner & \forall y_1 \in_0 x \dots \forall y_{n+1} \in_0 x \ (X_0(y_1, \dots, y_n) = y_{n+1} \\ 
+        & \iff \phi^{\ulcorner X \urcorner}(y_1, \dots, y_{n+1})) \urcorner \text{,}
+    \end{align*}
+    \item if $\ulcorner X \urcorner$ is an $n$-ary relation symbol, then 
+    \begin{align*}
+        \varphi^{\ulcorner X \urcorner}(x) := \ulcorner & \forall y_1 \in_0 x \dots \forall y_n \in_0 x \ (X_0(y_1, \dots, y_n) \\
+        & \iff \phi^{\ulcorner X \urcorner}(y_1, \dots, y_n)) \urcorner \text{, and}
+    \end{align*}
+    \item if $\ulcorner X \urcorner$ is a constant symbol, then 
+    \begin{align*}
+        \varphi^{\ulcorner X \urcorner}(x) := \ulcorner \forall y \in_0 x \ (X_0 = y \iff \phi^{\ulcorner X \urcorner}(y)) \urcorner \text{.}
+    \end{align*}
+\end{enumerate}
+Now define 
+\begin{equation*}
+    \varphi(x) := \bigwedge \{\varphi^{\ulcorner X \urcorner}(x) : \ulcorner X \urcorner \in \sigma(\mathfrak{M}_1)\}
 \end{equation*}
 
-At the beginning, the $\mathfrak{M}^*$ simulates $\mathfrak{M}_1$ in its $\mathfrak{M}_1$ portion, updating this portion of each configuration while keeping the ``non-tape'' $\mathfrak{M}_2$ portion undisturbed. In the background, checks are consistently being done. At the start of each step, before an update to its $\mathfrak{M}_1$ portion is carried out, $\mathfrak{M}^*$ checks if said portion will change going from the current state to the next. If so, it continues to simulate $\mathfrak{M}_1$. Otherwise, it copies the contents of the output tape to the input tape, erases all data from the output tape, and starts having its $\mathfrak{M}_2$ portion simulate $\mathfrak{M}_2$. From then on, the ``non-tape'' $\mathfrak{M}_1$ portion of each configuration is left untouched, so that $\mathfrak{M}^*$ terminates exactly when its simulation of $\mathfrak{M}_2$ ends.
+\begin{claim2}\label{834c}
+Let $s_0, s_1 \in S(\mathfrak{M}_1)$ and $\beta < \kappa$ be such that 
+\begin{enumerate}[label=(\roman*)]
+    \item\label{834ci} $\tau_{\mathfrak{M}_1}(s_0) = s_1$, and
+    \item\label{834ciii} $(s_0, s_1) \models_2 \varphi[x \mapsto \beta]$ 
+\end{enumerate}
+Then for any $s_2 \in S(\mathfrak{M}_1)$, $(s_1, s_2) \models_2 \varphi[x \mapsto \beta]$.
+\end{claim2}
 
-Checking that $\mathfrak{M}^*$ fulfils our requirement is straightforward.
+\begin{proof}
+Fix $s_2 \in S(\mathfrak{M}_1)$ and $\ulcorner X \urcorner \in \sigma(\mathfrak{M}_1)$. Then 
+\begin{align*}
+    & (s_1, s_2) \models_2 \varphi^{\ulcorner X \urcorner}[x \mapsto \beta] \\
+    \text{iff } & \varphi^{\ulcorner X \urcorner}[x \mapsto \beta] \text{ holds interpreting every symbol } \ulcorner Y_0 \urcorner \text{ therein as } \ulcorner Y \urcorner^{s_1} \\
+    \text{if } & \varphi^{\ulcorner X \urcorner}[x \mapsto \beta] \text{ holds interpreting every symbol } \ulcorner Y_0 \urcorner \text{ therein as } \ulcorner Y \urcorner^{s_0} \\
+    & \text{(by \ref{834ci} and \ref{834ciii})} \\
+    \text{iff } & (s_0, s_1) \models_2 \varphi[x \mapsto \beta] \text{.} \qedhere
+\end{align*}
+\end{proof}
+
+Setting
+\begin{equation*}
+    \phi^{\ulcorner c \urcorner}_{\mathfrak{M}^*}(x) := \ulcorner (\varphi(x) \wedge ``x = c_0 + 1") \vee (\neg \varphi(x) \wedge x = c_0) \urcorner \text{,}
+\end{equation*}
+we use $\ulcorner c \urcorner$ to eventually ascertain the termination  of $\mathfrak{M}_1$. Basically, $\mathfrak{M}^*$ begins by simulating $\mathfrak{M}_1$ in its $\mathfrak{M}_1$ portion, updating this portion of each configuration while keeping the ``non-tape'' $\mathfrak{M}_2$ portion undisturbed. At the start of each step, before an update to its $\mathfrak{M}_1$ portion is carried out, $\mathfrak{M}^*$ checks if ``$c > 0$''. If so, it simulates the next step of $\mathfrak{M}_1$. Otherwise, it copies the contents of the output tape to the input tape, erases all data from the output tape, and starts having its $\mathfrak{M}_2$ portion simulate $\mathfrak{M}_2$. From then on, the ``non-tape'' $\mathfrak{M}_1$ portion of each configuration is left untouched, so that $\mathfrak{M}^*$ terminates exactly when its simulation of $\mathfrak{M}_2$ ends. By Claim \ref{834c}, if $\mathfrak{M}_1$ terminates at step $\gamma$, then for some $\delta \in [\gamma, \gamma + \kappa]$, ``$c = 0$'' necessarily occurs for the first time at step $\delta$ in the run of $\mathfrak{M}^*$.
 \end{proof}
 
 It makes sense that a machine is more powerful when endowed with more space. This might not quite be the case for GSeqAs, but we can get close to this sort of monotonicity with a mild assumption.
@@ -1479,7 +1515,15 @@ Let $\alpha$ be an admissible ordinal. Suppose $A \leq^{P, s}_{\alpha} B$ and $B
 \end{prop}
 
 \begin{proof}
-As in the case of Proposition \ref{prop251}. the proof here is exactly the same as the proof of Proposition \ref{prop245}. We should additionally note that the termination run of $\mathfrak{M}^*$ --- as in the proof of Proposition \ref{prop245} --- with input $A$ and output $C$ is still short because it combines two short runs and $\alpha$ is closed under ordinal addition.
+Let $\mathfrak{M}_1$ witness $B \leq^{P, s}_{\alpha} C$ and $\mathfrak{M}_2$ witness $A \leq^{P, s}_{\alpha} B$. Further, let $\gamma$ be the length of the terminating run of $\mathfrak{M}_1$ on input $C$. We construct a GSeqA $\mathfrak{M}^*$ similar to how it is done in the proof of Proposition \ref{prop245}. The only difference is, in order to determine whether $\mathfrak{M}_1$ has terminated, we use $\gamma$ as a parameter and run a step counter until it hits $\gamma$. We should additionally note that the termination run of $\mathfrak{M}^*$ with input $C$ and output $A$ is still short because it combines two short runs and $\alpha$ is closed under ordinal addition.
+\end{proof}
+
+\begin{prop}\label{prop270o}
+Let $\alpha$ be an admissible ordinal and $A \subset \alpha$. Then $A \leq^{P, s}_{\alpha} \alpha \setminus A$, so also $A \leq^{P}_{\alpha} \alpha \setminus A$.
+\end{prop}
+
+\begin{proof}
+Bit-flipping can be done in a single step by some GSeqA.
 \end{proof}
 
 \begin{prop}\label{prop271n}
@@ -1564,7 +1608,7 @@ Let $\mathfrak{M}$ be a GSeqAP with parameter set $K$ witnessing $B \leq^{P, s}_
 
 Now, the statement $x \in B$ is semantically equivalent over $V$ to a $\Sigma_1$ formula with free variable $x$ and parameters among $K \cup \{dom(Sq)\}$ saying that a (unique) sequence representing our simulation exists. The construction of said sequence can be carried out correctly in $L_{\kappa}[A]$ through transfinite recursion, because $\Delta_0$ definitions are absolute between $L_{\kappa}[A]$ and $V$. Moreover, since $dom(Sq)  < \kappa$, $L_{\kappa}[A]$ recognises the sequence is set-sized by the regularity of $\kappa$, so indeed $B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
 
-Suppose $dom(Sq) = \gamma$. Then using $\gamma$ as a parameter, we can define a GSeqAP $\mathfrak{M}'$ that copies what $\mathfrak{M}$ does on each input until $\mathfrak{M}$ terminates, and flips every bit of the output tape thereafter. Now $\mathfrak{M}'$ witnesses $\kappa \setminus B \leq^{P, s}_{\kappa} A$, so by the argument in the preceding paragraph we have $\kappa \setminus B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
+Propositions \ref{prop270n} and \ref{prop270o} tell us there is a GSeqAP $\mathfrak{M}'$ witnessing $\kappa \setminus B \leq^{P, s}_{\kappa} A$, so by the argument in the preceding paragraph we have $\kappa \setminus B \in \mathbf{\Sigma_1}(L_{\kappa}[A])$.
 \end{proof}
 
 \begin{defi}[Koepke, \cite{koepke2}]
@@ -1617,7 +1661,7 @@ Let $A \subset \alpha$ and $B \in \mathbf{\Pi_1}(L_{\alpha}[A])$ for some admiss
 \end{cor}
 
 \begin{proof}
-That $B \in \mathbf{\Pi_1}(L_{\alpha}[A])$ implies $\alpha \setminus B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$, so let $\mathfrak{M}$ be a GSeqAP witnessing $\alpha \setminus B \leq^P_{\alpha} A$ constructed \textit{a la} the proof of Lemma \ref{lem273}. By modifying the code of $\mathfrak{M}$ such that in \hyperref[8340c3]{Case 3}, we bit-flip the contents of $R$ before copying them to the output tape, we obtain a GSeqAP witnessing $B \leq^P_{\alpha} A$.
+That $B \in \mathbf{\Pi_1}(L_{\alpha}[A])$ implies $\alpha \setminus B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$, so let $\mathfrak{M}$ be a GSeqAP witnessing $\alpha \setminus B \leq^P_{\alpha} A$ constructed \textit{a la} the proof of Lemma \ref{lem273}. Then $B \leq^P_{\alpha} A$ by Propositions \ref{prop251} and \ref{prop270o}.
 \end{proof}
 
 Lemmas \ref{lem269} and \ref{lem273} reflect the difference in computability between considering all terminating runs of GSeqAPs and considering only short terminating runs, for regular ordinal tape lengths. In tandem, the lemmas also give us a nice characterisation of the reducibility relation $\leq^P$.
