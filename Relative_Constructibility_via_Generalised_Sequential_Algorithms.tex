@@ -590,9 +590,9 @@ With the aforementioned flaws to \ref{def217} in mind, we seek to reformulate th
 \begin{defi}\label{def220}
 Let $\sigma$ be a signature. We say a sentence $\phi$ over $2 \cdot \sigma$ is \emph{bounded for} $\sigma$ iff for each $\ulcorner X \urcorner \in \sigma$ there are $\phi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner X \urcorner}$ such that
 \begin{enumerate}[label=(\alph*)]
-    \item  $\phi^{\ulcorner X \urcorner}$ is a $\Delta_0$ formula in the L\'{e}vy hierarchy over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma\}$ ($\subset 2 \cdot \sigma$),
+    \item\label{82161} $\phi^{\ulcorner X \urcorner}$ is a $\Delta_0$ formula in the L\'{e}vy hierarchy over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma\}$ ($\subset 2 \cdot \sigma$), each of which atomic formulas contains at most one function symbol,
     \item $\psi^{\ulcorner X \urcorner}$ is a sentence over $2 \cdot \sigma$,
-    \item if $\ulcorner X \urcorner$ is an $n$-ary function symbol, then 
+    \item\label{82163} if $\ulcorner X \urcorner$ is an $n$-ary function symbol, then 
     \begin{itemize}[label=$\circ$, leftmargin=20pt]
         \item $\phi^{\ulcorner X \urcorner}$ contains $n + 1$ free variables, and
         \item for some variable symbols $y_1, \dots, y_{n+1}$,
@@ -631,7 +631,13 @@ A few things are easily verifiable from Definition \ref{def220}. Let $\sigma$, $
         \forall s_0 \in S(\mathfrak{M}) \ \exists ! s_1 \in S(\mathfrak{M}) \ ((s_0, s_1) \models_2 \phi)
     \end{equation*}
     is absolute for transitive models of $\mathsf{ZFC}$ containing $\mathfrak{T}(\mathfrak{M})$.
-    \item Suppose $\phi = \phi^{\tau}_{\mathfrak{M}}$ for some SeqA $\mathfrak{M}$. Then in the context of $\mathfrak{M}$, for each $\ulcorner X \urcorner \in \sigma$, the value of the next state's interpretation of $\ulcorner X \urcorner$ at a point depends only on finitely many values of the current state's interpretations of symbols in $\sigma$. This agrees in spirit with the requirement of bounded exploration, albeit only locally. The caveat of bounded exploration being local is a reasonable --- even expected --- compromise for generalised computation.
+    \item In \ref{82161} of Definition \ref{def220}, we require that each atomic formula occurring in $\phi^{\ulcorner X \urcorner}$ contains at most one function symbol to prevent possible unbounded ``searches'' for existential witnesses, since e.g.
+    \begin{align*}
+        \ulcorner \forall x \ (X_1(x) = Y_1(x) \iff & \ \exists y \ (\phi^{\ulcorner X \urcorner}(x, y) \wedge \phi^{\ulcorner Y \urcorner}(x, y))) \urcorner \text{ and} \\
+        \ulcorner \forall x \ (X_1(Y_1(x)) = y \iff & \ \exists z \ (\phi^{\ulcorner X \urcorner}(z, y) \wedge \phi^{\ulcorner Y \urcorner}(x, z))) \urcorner
+    \end{align*}
+    are both logically implied by the conjunction of $\psi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner Y \urcorner}$ (see \ref{82163} of Definition \ref{def220}), for any two unary function symbols $\ulcorner X \urcorner, \ulcorner Y \urcorner \in \sigma$.
+    \item Suppose $\phi = \phi^{\tau}_{\mathfrak{M}}$ for some SeqA $\mathfrak{M}$. Then in the context of $\mathfrak{M}$, for each $\ulcorner X \urcorner \in \sigma$, the value of the next state's interpretation of $\ulcorner X \urcorner$ at a point depends only on finitely many values of the current state's interpretations of symbols in $\sigma$. Further, any ``search'' done within the current state for the computation of the next state's interpretation is bounded. These agree in spirit with the requirement of bounded exploration, albeit only locally. The caveat of bounded exploration being local is a reasonable --- even expected --- compromise for generalised computation.
 \end{enumerate}
 
 \subsection{Input and Output}\label{ss250}
@@ -725,7 +731,7 @@ Now we can formally state our requirements for $\phi^d_{\mathfrak{M}}$. Taking a
     \ulcorner X \urcorner \in \sigma(\mathfrak{M}) \setminus \{\ulcorner \in \urcorner, \ulcorner \mathrm{In} \urcorner, \ulcorner \mathrm{Out} \urcorner\}
 \end{equation*} there must be $\phi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner X \urcorner}$ such that
 \begin{enumerate}[label=(\alph*)]
-    \item $\phi^{\ulcorner X \urcorner}$ is a formula over $\{\ulcorner \in \urcorner\}$,
+    \item\label{simpa} $\phi^{\ulcorner X \urcorner}$ is a formula over $\{\ulcorner \in \urcorner\}$,
     \item $\psi^{\ulcorner X \urcorner}$ is a sentence over $\sigma(\mathfrak{M}) \setminus \{\ulcorner \mathrm{In} \urcorner, \ulcorner \mathrm{Out} \urcorner\}$,
     \item if $\ulcorner X \urcorner$ is an $n$-ary function symbol, then 
     \begin{itemize}[label=$\circ$, leftmargin=20pt]
@@ -840,16 +846,24 @@ A \emph{generalised sequential algorithm} --- henceforth \textit{GSeqA} --- $\ma
     \end{itemize}
     \item there is a unique $\mathfrak{T}(\mathfrak{M})$ for which $\mathfrak{T}(\mathfrak{M}) = (\emptyset, \sigma(\mathfrak{M}), \dot{\mathcal{U}}, \vartheta_{\mathfrak{M}})$,
     \item there is a unique $S(\mathfrak{M})$ for which $S(\mathfrak{M}) = \{s : s \models^* \mathfrak{T}(\mathfrak{M})\}$,
-    \item $\phi^{\tau}_{\mathfrak{M}}$ is bounded for $\sigma(\mathfrak{M})$, 
+    \item\label{8222d5} $\phi^{\tau}_{\mathfrak{M}}$ is bounded for $\sigma(\mathfrak{M})$, 
     \item for all $s_0 \in S(\mathfrak{M})$ there is a unique $s_1 \in S(\mathfrak{M})$ for which $(s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}$,
     \item $\phi^d_{\mathfrak{M}}$ is simple for $\sigma(\mathfrak{M})$, and
-    \item for all $A \subset \kappa(\mathfrak{M})$ there is a unique $s \in S(\mathfrak{M})$ for which
+    \item\label{8222d8} for all $A \subset \kappa(\mathfrak{M})$ there is a unique $s \in S(\mathfrak{M})$ for which
     \begin{equation*}
         \forall a \in \kappa(\mathfrak{M}) \ (a \in A \iff s \models \ulcorner \phi^d_{\mathfrak{M}} \wedge \forall y \ (\neg \mathrm{Out}(y)) \wedge \mathrm{In}(a) \urcorner) \text{.}
     \end{equation*}
 \end{enumerate}
 In this case, we say $\mathfrak{M} = (\kappa(\mathfrak{M}), \sigma(\mathfrak{M}), \phi^{\tau}_{\mathfrak{M}}, \phi^d_{\mathfrak{M}})$.
 \end{defi}
+
+\begin{prop}
+For any GSeqA $\mathfrak{M}$, $\phi^{\tau}_{\mathfrak{M}}$ can be rewritten as a $\Delta_0$ formula over $\{\ulcorner \in_0 \urcorner\}$.
+\end{prop}
+
+\begin{proof}
+By \ref{8222d5} to \ref{8222d8} of Definition \ref{def224}, as well as the definitions of being bounded and being simple for $\sigma(\mathfrak{M})$. In particular, notice how \ref{simpa} in the definition of being simple for $\sigma(\mathfrak{M})$ combines with \ref{82161} of Definition \ref{def220}.
+\end{proof}
 
 \begin{rem}\label{rem225}
 Fix any limit ordinal $\kappa$. Notice that there are only countably many GSeqAs $\mathfrak{M}$ satisfying $\kappa(\mathfrak{M}) = \kappa$. Indeed, this countable set of GSeqAs specifications is absolute for transitive models of $\mathsf{ZFC}$ containing $\kappa$.
