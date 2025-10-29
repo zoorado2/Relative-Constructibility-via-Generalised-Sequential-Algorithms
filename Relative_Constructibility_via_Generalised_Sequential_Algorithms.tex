@@ -591,7 +591,7 @@ With the aforementioned flaws to \ref{def217} in mind, we seek to reformulate th
 \begin{defi}\label{def220}
 Let $\sigma$ be a signature. We say a sentence $\phi$ over $2 \cdot \sigma$ is \emph{bounded for} $\sigma$ iff for each $\ulcorner X \urcorner \in \sigma$ there are $\phi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner X \urcorner}$ such that
 \begin{enumerate}[label=(\alph*)]
-    \item\label{82161} $\phi^{\ulcorner X \urcorner}$ is a $\Delta_0$ formula in the L\'{e}vy hierarchy over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma\}$ ($\subset 2 \cdot \sigma$), each of which atomic formulas contains at most one function symbol,
+    \item\label{82161} $\phi^{\ulcorner X \urcorner}$ is a $\Delta_0$ formula in the L\'{e}vy hierarchy over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma\}$ ($\subset 2 \cdot \sigma$), each of which atomic formulas contains at most one symbol from $2 \cdot \sigma$,
     \item $\psi^{\ulcorner X \urcorner}$ is a sentence over $2 \cdot \sigma$,
     \item\label{82163} if $\ulcorner X \urcorner$ is an $n$-ary function symbol, then 
     \begin{itemize}[label=$\circ$, leftmargin=20pt]
@@ -609,7 +609,7 @@ Let $\sigma$ be a signature. We say a sentence $\phi$ over $2 \cdot \sigma$ is \
             \psi^{\ulcorner X \urcorner} = \ulcorner \forall y_1 \dots \forall y_n \ (X_1(y_1, \dots, y_n) \iff \phi^{\ulcorner X \urcorner}(y_1, \dots, y_n)) \urcorner \text{,}
         \end{align*}
     \end{itemize}
-    \item if $\ulcorner X \urcorner$ is a constant symbol, then 
+    \item\label{82165} if $\ulcorner X \urcorner$ is a constant symbol, then 
     \begin{itemize}[label=$\circ$, leftmargin=20pt]
         \item $\phi^{\ulcorner X \urcorner}$ contains $1$ free variable, and
         \item for some variable symbol $y$,
@@ -632,12 +632,13 @@ A few things are easily verifiable from Definition \ref{def220}. Let $\sigma$, $
         \forall s_0 \in S(\mathfrak{M}) \ \exists ! s_1 \in S(\mathfrak{M}) \ ((s_0, s_1) \models_2 \phi)
     \end{equation*}
     is absolute for transitive models of $\mathsf{ZFC}$ containing $\mathfrak{T}(\mathfrak{M})$.
-    \item In \ref{82161} of Definition \ref{def220}, we require that each atomic formula occurring in $\phi^{\ulcorner X \urcorner}$ contains at most one function symbol to prevent possible unbounded searches for existential witnesses, as we propagate the evaluation of our next state backwards. For example, the sentences 
+    \item In \ref{82161} of Definition \ref{def220}, we require that each atomic formula occurring in $\phi^{\ulcorner X \urcorner}$ contains at most one symbol from $2 \cdot \sigma$ to prevent possible unbounded searches for existential witnesses, as we propagate the evaluation of our next state backwards. For example, the sentences 
     \begin{align*}
-        \ulcorner \forall x \ (X_1(x) = Y_1(x) \iff & \ \exists y \ (\phi^{\ulcorner X \urcorner}(x, y) \wedge \phi^{\ulcorner Y \urcorner}(x, y))) \urcorner \text{ and} \\
-        \ulcorner \forall x \ (X_1(Y_1(x)) = y \iff & \ \exists z \ (\phi^{\ulcorner X \urcorner}(z, y) \wedge \phi^{\ulcorner Y \urcorner}(x, z))) \urcorner
+        \ulcorner \forall x \ (X_1(x) = Y_1(x) \iff & \ \exists y \ (\phi^{\ulcorner X \urcorner}(x, y) \wedge \phi^{\ulcorner Y \urcorner}(x, y))) \urcorner \text{,} \\
+        \ulcorner \forall x \ (X_1(c) = x \iff & \ \exists z \ (\phi^{\ulcorner c \urcorner}(z) \wedge \phi^{\ulcorner X \urcorner}(z, x))) \urcorner \text{ and} \\
+        \ulcorner Z_1(c) \iff & \ \exists z \ (\phi^{\ulcorner c \urcorner}(z) \wedge \phi^{\ulcorner Z \urcorner}(z)) \urcorner
     \end{align*}
-    are logically implied by the conjunction of $\psi^{\ulcorner X \urcorner}$ and $\psi^{\ulcorner Y \urcorner}$ (see \ref{82163} of Definition \ref{def220}) for any two unary function symbols $\ulcorner X \urcorner, \ulcorner Y \urcorner \in \sigma$, and the unbounded existential quantifiers occurring in them signal the necessity of unbounded exploration in obtaining the truth values of $\ulcorner X_1(x) = Y_1(x) \urcorner$ and $\ulcorner X_1(Y_1(x)) = y \urcorner$.
+    are logically implied by the conjunction of $\psi^{\ulcorner X \urcorner}$, $\psi^{\ulcorner Y \urcorner}$, $\psi^{\ulcorner Z \urcorner}$ and $\psi^{\ulcorner c \urcorner}$ (see \ref{82163} to \ref{82165} of Definition \ref{def220}) for any unary two function symbols $\ulcorner X \urcorner$ and $\ulcorner Y \urcorner$, any unary relation symbol $\ulcorner Z \urcorner$, and any constant symbol $\ulcorner c \urcorner$, as long as they are all members of $\sigma$. The unbounded existential quantifiers occurring in these sentences signal the necessity of unbounded exploration in obtaining the truth values of $\ulcorner X_1(x) = Y_1(x) \urcorner$, $\ulcorner X_1(c) = x \urcorner$ and $\ulcorner Z_1(c) \urcorner$. 
     \item Suppose $\phi = \phi^{\tau}_{\mathfrak{M}}$ for some SeqA $\mathfrak{M}$. Then in the context of $\mathfrak{M}$, for each $\ulcorner X \urcorner \in \sigma$, the value of the next state's interpretation of $\ulcorner X \urcorner$ at a point depends only on finitely many values of the current state's interpretations of symbols in $\sigma$. Further, any ``search'' done within the current state for the computation of the next state's interpretation is bounded. These agree in spirit with the requirement of bounded exploration, albeit only locally. The caveat of bounded exploration being local is a reasonable --- even expected --- compromise for generalised computation.
 \end{enumerate}
 
@@ -1231,7 +1232,8 @@ Fix $s_2 \in S(\mathfrak{M}_1)$ and $\ulcorner X \urcorner \in \sigma(\mathfrak{
     & (s_1, s_2) \models_2 \varphi^{\ulcorner X \urcorner}[x \mapsto \beta] \\
     \text{iff } & \varphi^{\ulcorner X \urcorner}[x \mapsto \beta] \text{ holds interpreting every symbol } \ulcorner Y_0 \urcorner \text{ therein as } \ulcorner Y \urcorner^{s_1} \\
     \text{if } & \varphi^{\ulcorner X \urcorner}[x \mapsto \beta] \text{ holds interpreting every symbol } \ulcorner Y_0 \urcorner \text{ therein as } \ulcorner Y \urcorner^{s_0} \\
-    & \text{(by \ref{834ci} and \ref{834ciii})} \\
+    & \text{(by \ref{834ci}, \ref{834ciii} and the fact that every atomic formula occurring in } \phi^{\ulcorner X \urcorner} \\
+    & \text{ --- or in } \varphi^{\ulcorner X \urcorner} \text{ for that matter --- contains at most one symbol from } 2 \cdot \sigma \text{)} \\
     \text{iff } & (s_0, s_1) \models_2 \varphi[x \mapsto \beta] \text{.} \qedhere
 \end{align*}
 \end{proof}
