@@ -1240,11 +1240,9 @@ Suppose $\kappa, \kappa'$ are limit ordinals, $\kappa < \kappa'$, $A \leq^C_{\ka
 \end{prop}
 
 \begin{proof}
-Let $\mathfrak{M}$ be a GSeqA witnessing $A \leq^C_{\kappa} B$. Define a GSeqA $\mathfrak{M}'$ with $\kappa(\mathfrak{M}') = \kappa'$ and $\sigma(\mathfrak{M}') = \sigma(\mathfrak{M})$. Since $\kappa$ is $\Delta_0$-definable in $(\kappa'; \in)$, each of the statements
-\begin{equation*}
-    \text{``} x < \kappa \text{'', ``} x = \kappa \text{'', and ``} x > \kappa \text{''}
-\end{equation*}
-is expressible in $(\kappa'; \in)$ by a $\Delta_0$ formula with a single free variable $x$. We can thus modify both $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ into $\Delta_0$ formulas $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$ that incorporate checks against $\kappa$, such that if $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ is an $n$-ary function symbol and $\alpha_1, \dots, \alpha_n \in \kappa'$, then the following gets carried out in $\mathfrak{M}'$.
+Let $\mathfrak{M}$ be a GSeqA witnessing $A \leq^C_{\kappa} B$. Define a GSeqA $\mathfrak{M}'$ with $\kappa(\mathfrak{M}') = \kappa'$ and $\sigma(\mathfrak{M}') = \sigma(\mathfrak{M}) \cup \{\ulcorner c \urcorner\}$ for some constant symbol $\ulcorner c \urcorner \not\in \sigma(\mathfrak{M})$. We set the default value of the constant $c$ to be $\kappa$, which is possible since $\kappa$ is $\Delta_0$-definable in $(\kappa'; \in)$. In $\phi^{\tau}_{\mathfrak{M}'}$, we stipulate that the value of $c$ remains the same going from one state to the next. This allows us to quantify over members of $\kappa$ in any computational run from an initial state. We are thus able to incorporate $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ into $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$ respectively in a $\Delta_0$ manner, such that the simulation of $\mathfrak{M}'$ is accurate and confined to $\kappa$. 
+
+More precisely, whenever $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ is an $n$-ary function symbol and $\alpha_1, \dots, \alpha_n \in \kappa'$, the following gets carried out in $\mathfrak{M}'$.
 \begin{enumerate}[label=(\arabic*)]
     \item The default value of $X(\alpha_1, \dots, \alpha_n)$
     \begin{enumerate}[label=(\alph*)]
@@ -1258,7 +1256,7 @@ is expressible in $(\kappa'; \in)$ by a $\Delta_0$ formula with a single free va
         \item return $0$ otherwise.
     \end{enumerate}
 \end{enumerate} 
-When simulating $\tau_{\mathfrak{M}}$ in $\mathfrak{M}'$, the main problem faced is the possible overflow of function values at limit states, due to $lim \ inf$ working differently in $(\kappa; \in)$ and in $(\kappa'; \in)$. We solve this problem by checking for and correcting overflows through \ref{8362}\ref{8362a} in each step of the computation. Beyond that, it is straightforward to verify that $\mathfrak{M}'$ witnesses $A \leq^C_{\kappa'} B$ with our choice of $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$.
+When simulating $\tau_{\mathfrak{M}}$ in $\mathfrak{M}'$, the main problem faced is the possible overflow of function values at limit states, due to $lim \ inf$ working differently in $(\kappa; \in)$ and in $(\kappa'; \in)$. We solve this problem by checking for and correcting overflows through \ref{8362}\ref{8362a} in each step of the computation, with the help of the symbol $\ulcorner c \urcorner$. Beyond that, it is straightforward to verify that $\mathfrak{M}'$ witnesses $A \leq^C_{\kappa'} B$ with our design of $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$.
 \end{proof}
 
 \subsection{Further Modifications}\label{ss320}
@@ -1339,11 +1337,7 @@ Suppose $\kappa, \kappa'$ are limit ordinals, $\kappa < \kappa'$ and $A \leq^P_{
 \end{prop}
 
 \begin{proof}
-If we enlarge $\sigma(\mathfrak{M}')$ in the proof of Proposition \ref{prop246} to include an additional parameter for $\kappa$, then the statements
-\begin{equation*}
-    \text{``} x < \kappa \text{'', ``} x = \kappa \text{'', and ``} x > \kappa \text{''}
-\end{equation*}
-become expressible in $(\kappa'; \in)$ by $\Delta_0$ formulas with a single free variable $x$. The rest of the proof of Proposition \ref{prop246} goes through verbatim here.
+We slightly modify the definition of $\mathfrak{M}'$ in the proof of Proposition \ref{prop246} by letting $\ulcorner c \urcorner$ interpret the parameter $\kappa$, so that no default value of $\ulcorner c \urcorner$ needs to be declared. Then the rest of the proof of Proposition \ref{prop246} goes through verbatim.
 \end{proof}
 
 \begin{rem}\label{rem256}
