@@ -849,7 +849,6 @@ A \emph{generalised sequential algorithm} --- henceforth \textit{GSeqA} --- $\ma
     \item there is a unique $\mathfrak{T}(\mathfrak{M})$ for which $\mathfrak{T}(\mathfrak{M}) = (\emptyset, \sigma(\mathfrak{M}), \dot{\mathcal{U}}, \vartheta_{\mathfrak{M}})$,
     \item there is a unique $S(\mathfrak{M})$ for which $S(\mathfrak{M}) = \{s : s \models^* \mathfrak{T}(\mathfrak{M})\}$,
     \item\label{8222d5} $\phi^{\tau}_{\mathfrak{M}}$ is bounded for $\sigma(\mathfrak{M})$, 
-    \item for all $s_0 \in S(\mathfrak{M})$ there is a unique $s_1 \in S(\mathfrak{M})$ for which $(s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}$,
     \item $\phi^d_{\mathfrak{M}}$ is simple for $\sigma(\mathfrak{M})$, and
     \item\label{8222d8} for all $A \subset \kappa(\mathfrak{M})$ there is a unique $s \in S(\mathfrak{M})$ for which
     \begin{equation*}
@@ -867,14 +866,19 @@ Fix any limit ordinal $\kappa$. Notice that there are only countably many GSeqAs
 If $\mathfrak{M} = (\kappa(\mathfrak{M}), \sigma(\mathfrak{M}), \phi^{\tau}_{\mathfrak{M}}, \phi^d_{\mathfrak{M}})$ is a GSeqA, define 
 \begin{enumerate}[label=(\arabic*)]
     \item $S(\mathfrak{M})$ as in Definition \ref{def224},
-    \item $\tau_{\mathfrak{M}} := \{(s_0, s_1) \in S(\mathfrak{M})^2 : (s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}\}$,
+    \item 
+    \!
+    $\begin{aligned}[t]
+       \tau_{\mathfrak{M}} := \{(s_0, s_1) \in S(\mathfrak{M})^2 : \ & \exists ! s_1 \ ((s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}) \ \vee \\
+       & (\neg \exists ! s_1 \ ((s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}) \ \wedge \ s_0 = s_1)\} \text{,}
+    \end{aligned}$
     \item 
     \!
     $\begin{aligned}[t]
        l_{\mathfrak{M}} := \{ & (A, s) \in \mathcal{P}(\kappa(\mathfrak{M})) \times S(\mathfrak{M}) : \\
-       & \forall a \in \kappa(\mathfrak{M}) \ (a \in A \iff s \models \ulcorner \phi^d_{\mathfrak{M}} \wedge \forall y \ (\neg \mathrm{Out}(y)) \wedge \mathrm{In}(a) \urcorner)\} 
+       & \forall a \in \kappa(\mathfrak{M}) \ (a \in A \iff s \models \ulcorner \phi^d_{\mathfrak{M}} \wedge \forall y \ (\neg \mathrm{Out}(y)) \wedge \mathrm{In}(a) \urcorner)\} \text{,}
     \end{aligned}$
-    \item $I(\mathfrak{M}) := ran(l_{\mathfrak{M}})$
+    \item $I(\mathfrak{M}) := ran(l_{\mathfrak{M}})$, and
     \item 
     \!
     $\begin{aligned}[t]
@@ -1097,7 +1101,7 @@ But this means $S(\mathfrak{M}^*) = S(\mathfrak{M}')$, so $\mathfrak{M}^*$ is st
 
 The symbols in $\sigma(\mathfrak{M})$ have default interpretations following $\mathfrak{M}$. For all $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$, the default interpretation of $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ is the empty set. The two extra constant symbols $\ulcorner c_0 \urcorner$ and $\ulcorner c_1 \urcorner$ default to $0$ and $1$ respectively. 
 
-At every step of a computation of $\mathfrak{M}^*$, it checks if ``$c_0 = c_1$''. If the answer is no, it copies the previous $\mathfrak{M}$ portion data to the $R^{\ulcorner X \urcorner}$s within the fibers denoted by $c_0$ (which is supposed to count the steps in every short terminating run), simulates the next step of its $\mathfrak{M}$ portion, and increments both $c_0$ and $c_1$. Otherwise, the moral implication is that a limit stage has been reached, whence it first verifies if $Y$ is functional on the current $R^{\ulcorner X \urcorner}$s (note that the $R^{\ulcorner X \urcorner}$s might contain gibberish in states not reachable from any initial state). If so, it computes point-wise limits of the $R^{\ulcorner X \urcorner}$s according to $Y$, copies the resulting limit state information to its $\mathfrak{M}$ portion, and increments just $c_1$. Otherwise, it terminates. We can argue by induction that $\mathfrak{M}^*$ always correctly computes the states of a short terminating run of $\mathfrak{M}$, primarily because the preservation of ordinal limits by the simple limit formulas in $Z$ allows both
+At every step of a computation of $\mathfrak{M}^*$, it checks if ``$c_0 = c_1$''. If the answer is no, it copies the previous $\mathfrak{M}$ portion data to the $R^{\ulcorner X \urcorner}$s within the fibers denoted by $c_0$ (which is supposed to count the steps in every short terminating run), simulates the next step of its $\mathfrak{M}$ portion, and increments both $c_0$ and $c_1$. Otherwise, the moral implication is that a limit stage has been reached, whence pointwise for each of the current $R^{\ulcorner X \urcorner}$s, it computes the limit of the associated $c_0$-sequence in accordance with $Y$, copies the resulting limit state information to its $\mathfrak{M}$ portion, and increments just $c_1$. We can argue by induction that $\mathfrak{M}^*$ always correctly computes the states of a short terminating run of $\mathfrak{M}$, primarily because the preservation of ordinal limits by the simple limit formulas in $Z$ allows both
 \begin{itemize}
     \item the preservation of data previously stored in the $R^{\ulcorner X \urcorner}$s, and
     \item the pair of constants $c_0$ and $c_1$ to flag limit stages of a terminating run.
@@ -1747,7 +1751,7 @@ for any admissible ordinal $\alpha$, and the inclusions cannot be reversed in ge
 \end{equation}
 for admissible ordinals $\alpha$. The penultimate inclusion cannot be reversed in general because $\leq^{P, s}_{\alpha}$ is transitive for all admissible $\alpha$ but $\preceq_{\alpha}$ is not. Incidentally, by Fact \ref{fact334}, this means there exists some (necessarily singular) admissible $\alpha$ and $A, B \subset \alpha$ such that $B \leq^{P, s}_{\alpha} A$ and $B \not\in \mathbf{\Delta_1}(L_{\alpha}[A])$. That the last inclusion cannot be reversed is due to Lemmas \ref{lem269} and \ref{lem273}.  
 
-Table \ref{table3} summarises the similarities and differences among the relations $\leq^{P, s}_{\alpha}$, $\leq^P_{\alpha}$, $\leq_{\alpha}$ and $\preceq_{\alpha}$. When we say a relation possesses the property of ``oracle-analogue'', we mean that the definition of said relation depends on --- or makes reference to --- some object analogous to the oracle in the definition of classical oracle machines.
+Table \ref{table3} summarises the similarities and differences among the relations $\leq^{P, s}_{\alpha}$, $\leq^P_{\alpha}$, $\leq_{\alpha}$ and $\preceq_{\alpha}$. When we say a relation possesses the property of ``oracle-analogue'', we mean that the definition of said relation depends on --- or makes reference to --- some object analogous to the oracle in the definition of classical oracle machines. When we say a relation is ``upward persistent'', we mean that said relation enlarges as its parameter $\alpha$ increases.
 
 \begin{table}[!ht]
     \caption[Comparing our new relative computability relations against more standard relations]{Comparing two of our new relative computability relations against more standard relations in the study of generalised computability, at an arbitrary admissible ordinal $\alpha$.}
@@ -1759,7 +1763,7 @@ Table \ref{table3} summarises the similarities and differences among the relatio
         &\makebox[2em]{$\leq^P_{\alpha}$}&\makebox[2em]{$\leq^{P, s}_{\alpha}$}\\\hline\hline
         Oracle-analogue? & \ding{51} & \ding{51} & \ding{55} & \ding{55} \\\hline
         Transitive? & \ding{51} & \ding{55} & \ding{51} & \ding{51} \\\hline
-        Upward consistent? & \ding{55} & \ding{51} & \ding{51} & \ding{51} \\\hline
+        Upward persistent? & \ding{55} & \ding{51} & \ding{51} & \ding{51} \\\hline
         Appears in$\dots$ & $\alpha$-recursion & $\alpha$-computability & Def. \ref{def38} & Def. \ref{def269p} \\\hline
     \end{tabular}
 \end{table}
