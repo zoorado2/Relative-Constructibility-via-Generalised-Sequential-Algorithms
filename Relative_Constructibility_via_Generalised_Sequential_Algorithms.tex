@@ -966,7 +966,7 @@ then $lim \ inf (T)$ and $lim \ sup (T)$ always exist in $\kappa(\mathfrak{M})$.
 
 Point-wise $lim \ inf$ and $lim \ sup$ operations are commonly used to define the limit stages of transfinite computations. Hamkins and Lewis, in \cite{ittm}, defined each cell in the tape of an infinite time Turing machine to take the $lim \ sup$ of its previous values. Koepke, in his definition of ordinal Turing machines (\cite{koepke1} and \cite{koepke2}), instead require each cell of the machine tape to take the $lim \ inf$ of its previous values. Point-wise $lim \ inf$ and $lim \ sup$ always exist in these generalised Turing machines, for computations shorter than the lengths of their tapes. This is because single-step movements of these machines are always small, and consequently the hypothesis of Fact \ref{fact230} applies.
 
-Hereon, we shall identify relations with boolean functions and constants with $0$-ary functions wherever convenient, in part so that only function symbols need to be considered in definitions and case analyses. 
+Hereon, because $0$ and $1$ are both $\Delta_0$-definable in $(\alpha; \in)$ for every limit ordinal $\alpha$, we shall identify relations with boolean functions and constants with $0$-ary functions wherever convenient --- this is always possible to formally implement within the transition function via some form of type-checking --- so as to simplify the definitions and (the case analyses in) the proofs that follow. 
 
 \begin{defi}
 Let $\mathfrak{M}$ be a GSeqA and $Sq$ be a function from some ordinal into $S(\mathfrak{M})$. Given $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ an $n$-ary function symbol, denote by $\ulcorner R^{\ulcorner X \urcorner} \urcorner$ a distinguished $(n+2)$-ary relation symbol and define the relation 
@@ -1195,23 +1195,11 @@ Let $\mathfrak{M}_1$ witness $B \leq^C_{\kappa} C$ and $\mathfrak{M}_2$ witness 
 \begin{equation*}
     \phi^d_{\mathfrak{M}^*} := \phi^d_{\mathfrak{M}_1} \wedge \phi^d_{\mathfrak{M}_2} \wedge \ulcorner c = \langle 1 \rangle \urcorner \text{.}
 \end{equation*}
-For each $\ulcorner X \urcorner \in \sigma(\mathfrak{M}_1)$, define a formula $\varphi^{\ulcorner X \urcorner}$ over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma(\mathfrak{M}_1)\}$ with one free variable as follows:
-\begin{enumerate}[label=(\alph*)]
-    \item if $\ulcorner X \urcorner$ is an $n$-ary function symbol, then 
-    \begin{align*}
-        \varphi^{\ulcorner X \urcorner}(x) := \ulcorner & \forall y_1 \in_0 x \dots \forall y_{n+1} \in_0 x \ (X_0(y_1, \dots, y_n) = y_{n+1} \\ 
-        & \iff \phi^{\ulcorner X \urcorner}(y_1, \dots, y_{n+1})) \urcorner \text{,}
-    \end{align*}
-    \item if $\ulcorner X \urcorner$ is an $n$-ary relation symbol, then 
-    \begin{align*}
-        \varphi^{\ulcorner X \urcorner}(x) := \ulcorner & \forall y_1 \in_0 x \dots \forall y_n \in_0 x \ (X_0(y_1, \dots, y_n) \\
-        & \iff \phi^{\ulcorner X \urcorner}(y_1, \dots, y_n)) \urcorner \text{, and}
-    \end{align*}
-    \item if $\ulcorner X \urcorner$ is a constant symbol, then 
-    \begin{align*}
-        \varphi^{\ulcorner X \urcorner}(x) := \ulcorner \forall y \in_0 x \ (X_0 = y \iff \phi^{\ulcorner X \urcorner}(y)) \urcorner \text{.}
-    \end{align*}
-\end{enumerate}
+For each $n$-ary function symbol $\ulcorner X \urcorner \in \sigma(\mathfrak{M}_1)$, define a formula $\varphi^{\ulcorner X \urcorner}$ over $\{\ulcorner Y_0 \urcorner : \ulcorner Y \urcorner \in \sigma(\mathfrak{M}_1)\}$ with one free variable as follows:
+\begin{align*}
+    \varphi^{\ulcorner X \urcorner}(x) := \ulcorner & \forall y_1 \in_0 x \dots \forall y_{n+1} \in_0 x \ (X_0(y_1, \dots, y_n) = y_{n+1} \\ 
+    & \iff \phi^{\ulcorner X \urcorner}(y_1, \dots, y_{n+1})) \urcorner \text{,}
+\end{align*}
 Now define 
 \begin{equation*}
     \varphi(x) := \bigwedge \{\varphi^{\ulcorner X \urcorner}(x) : \ulcorner X \urcorner \in \sigma(\mathfrak{M}_1)\}
@@ -1240,9 +1228,9 @@ Fix $s_2 \in S(\mathfrak{M}_1)$ and $\ulcorner X \urcorner \in \sigma(\mathfrak{
 
 Setting
 \begin{equation*}
-    \phi^{\ulcorner c \urcorner}_{\mathfrak{M}^*}(x) := \ulcorner (\varphi(x) \wedge ``x = c_0 + 1") \vee (\neg \varphi(x) \wedge x = c_0) \urcorner \text{,}
+    \phi^{\ulcorner c \urcorner}_{\mathfrak{M}^*}(x) := \ulcorner (\varphi(x) \wedge ``x = c_0 + 1") \vee (\neg \varphi(x) \wedge x = c_0) \urcorner 
 \end{equation*}
-we use $\ulcorner c \urcorner$ to eventually ascertain the termination  of $\mathfrak{M}_1$. Basically, $\mathfrak{M}^*$ begins by simulating $\mathfrak{M}_1$ in its $\mathfrak{M}_1$ portion, updating this portion of each configuration while keeping the ``non-tape'' $\mathfrak{M}_2$ portion undisturbed. At the start of each step, before an update to its $\mathfrak{M}_1$ portion is carried out, $\mathfrak{M}^*$ checks if ``$c > 0$''. If so, it simulates the next step of $\mathfrak{M}_1$. Otherwise, it copies the contents of the output tape to the input tape, erases all data from the output tape, and starts having its $\mathfrak{M}_2$ portion simulate $\mathfrak{M}_2$. From then on, the ``non-tape'' $\mathfrak{M}_1$ portion of each configuration is left untouched, so that $\mathfrak{M}^*$ terminates exactly when its simulation of $\mathfrak{M}_2$ ends. By Claim \ref{834c}, if $\mathfrak{M}_1$ terminates at step $\gamma$, then for some $\delta \in [\gamma, \gamma + \kappa]$, ``$c = 0$'' necessarily occurs for the first time at step $\delta$ in the run of $\mathfrak{M}^*$.
+as a conjunct in $\phi^{\tau}_{\mathfrak{M}^*}$, we use $\ulcorner c \urcorner$ to eventually ascertain the termination  of $\mathfrak{M}_1$. Basically, $\mathfrak{M}^*$ begins by simulating $\mathfrak{M}_1$ in its $\mathfrak{M}_1$ portion, updating this portion of each configuration while keeping the ``non-tape'' $\mathfrak{M}_2$ portion undisturbed. At the start of each step, before an update to its $\mathfrak{M}_1$ portion is carried out, $\mathfrak{M}^*$ checks if ``$c > 0$''. If so, it simulates the next step of $\mathfrak{M}_1$. Otherwise, it copies the contents of the output tape to the input tape, erases all data from the output tape, and starts having its $\mathfrak{M}_2$ portion simulate $\mathfrak{M}_2$. From then on, the ``non-tape'' $\mathfrak{M}_1$ portion of each configuration is left untouched, so that $\mathfrak{M}^*$ terminates exactly when its simulation of $\mathfrak{M}_2$ ends. By Claim \ref{834c}, if $\mathfrak{M}_1$ terminates at step $\gamma$, then for some $\delta \in [\gamma, \gamma + \kappa]$, ``$c = 0$'' necessarily occurs for the first time at step $\delta$ in the run of $\mathfrak{M}^*$.
 \end{proof}
 
 It makes sense that a machine is more powerful when endowed with more space. This might not quite be the case for GSeqAs, but we can get close to this sort of monotonicity with a mild assumption.
@@ -1252,20 +1240,25 @@ Suppose $\kappa, \kappa'$ are limit ordinals, $\kappa < \kappa'$, $A \leq^C_{\ka
 \end{prop}
 
 \begin{proof}
-Let $\mathfrak{M}$ be a GSeqA witnessing $A \leq^C_{\kappa} B$. Define a GSeqA $\mathfrak{M}'$ with $\kappa(\mathfrak{M}') = \kappa'$ and $\sigma(\mathfrak{M}') = \sigma(\mathfrak{M})$. Since $\kappa$ is $\Delta_0$-definable over $(\kappa'; \in)$, we can relativise both $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ to $\kappa'$ so that if $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ is an $n$-ary function symbol and $\alpha_1, \dots, \alpha_n \in \kappa'$, then 
+Let $\mathfrak{M}$ be a GSeqA witnessing $A \leq^C_{\kappa} B$. Define a GSeqA $\mathfrak{M}'$ with $\kappa(\mathfrak{M}') = \kappa'$ and $\sigma(\mathfrak{M}') = \sigma(\mathfrak{M})$. Since $\kappa$ is $\Delta_0$-definable in $(\kappa'; \in)$, each of the statements
+\begin{equation*}
+    \text{``} x < \kappa \text{'', ``} x = \kappa \text{'', and ``} x > \kappa \text{''}
+\end{equation*}
+is expressible in $(\kappa'; \in)$ by a $\Delta_0$ formula with a single free variable $x$. We can thus modify both $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ into $\Delta_0$ formulas $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$ that incorporate checks against $\kappa$, such that if $\ulcorner X \urcorner \in \sigma(\mathfrak{M})$ is an $n$-ary function symbol and $\alpha_1, \dots, \alpha_n \in \kappa'$, then the following gets carried out in $\mathfrak{M}'$.
 \begin{enumerate}[label=(\arabic*)]
-    \item the default value of $X(\alpha_1, \dots, \alpha_n)$
+    \item The default value of $X(\alpha_1, \dots, \alpha_n)$
     \begin{enumerate}[label=(\alph*)]
-        \item follows what is given by $\phi^d_{\mathfrak{M}}$ if $\alpha_1, \dots, \alpha_n \in \kappa$, and
-        \item is set to $0$ otherwise, and
-    \end{enumerate}
-    \item the next-stage value of $X(\alpha_1, \dots, \alpha_n)$
-    \begin{enumerate}[label=(\alph*)]
-        \item follows the result of computation by $\tau_{\mathfrak{M}}$ if $\alpha_1, \dots, \alpha_n \in \kappa$, and
+        \item follows what is given by $\phi^d_{\mathfrak{M}}$ in $(\kappa; \in)$ if $\alpha_1, \dots, \alpha_n \in \kappa$, and
         \item is set to $0$ otherwise.
     \end{enumerate}
+    \item\label{8362} To compute the next-stage value of $X(\alpha_1, \dots, \alpha_n)$, we
+    \begin{enumerate}[label=(\alph*)]
+        \item\label{8362a} substitute $\langle 0 \rangle$ for each term in the conjunct $\phi^{\ulcorner X \urcorner}[x_i \mapsto \alpha_i]$ associated with $\ulcorner X \urcorner$ in $\phi^{\tau}_{\mathfrak{M}}[x_i \mapsto \alpha_i]$ that evaluates to a value $\geq \kappa$, to obtain $(\phi^{\ulcorner X \urcorner})'$, then
+        \item return the result of evaluating $(\phi^{\ulcorner X \urcorner})'$ in $(\kappa; \in)$ if $\alpha_1, \dots, \alpha_n \in \kappa$, and
+        \item return $0$ otherwise.
+    \end{enumerate}
 \end{enumerate} 
-Set $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$ to be the relativised versions of $\phi^d_{\mathfrak{M}}$ and $\phi^{\tau}_{\mathfrak{M}}$ respectively. Then $\mathfrak{M}'$ witnesses $A \leq^C_{\kappa'} B$.
+When simulating $\tau_{\mathfrak{M}}$ in $\mathfrak{M}'$, the main problem faced is the possible overflow of function values at limit states, due to $lim \ inf$ working differently in $(\kappa; \in)$ and in $(\kappa'; \in)$. We solve this problem by checking for and correcting overflows through \ref{8362}\ref{8362a} in each step of the computation. Beyond that, it is straightforward to verify that $\mathfrak{M}'$ witnesses $A \leq^C_{\kappa'} B$ with our choice of $\phi^d_{\mathfrak{M}'}$ and $\phi^{\tau}_{\mathfrak{M}'}$.
 \end{proof}
 
 \subsection{Further Modifications}\label{ss320}
@@ -1346,12 +1339,11 @@ Suppose $\kappa, \kappa'$ are limit ordinals, $\kappa < \kappa'$ and $A \leq^P_{
 \end{prop}
 
 \begin{proof}
-We modify the construction of $\mathfrak{M}'$ in the proof of Proposition \ref{prop246}. To ensure $\kappa$ can be referred to in the relativisation process, we add two fresh constant symbols $\ulcorner c \urcorner$ and $\ulcorner d \urcorner$ to $\sigma(\mathfrak{M'})$ and set
-\begin{gather*}
-    \vartheta_{\mathfrak{M}'}(\ulcorner c \urcorner) := (\{\kappa\}, 1) \\
-    \vartheta_{\mathfrak{M}'}(\ulcorner d \urcorner) := (\kappa', 0) \text{.}
-\end{gather*}
-As there is no way to formulate $\phi^d_{\mathfrak{M}'}$ such that $\ulcorner c \urcorner$ occurs in it, we choose $\phi^d_{\mathfrak{M}'}$ to be any universally valid sentence over $\sigma(\mathfrak{M'})$. For example, setting all return values to $0$ works. Define $\tau_{\mathfrak{M}'}$ as follows. If ``$d = 0$'' in the current state, make use of $c$ to set up the $\sigma(\mathfrak{M})$ portion of the next state according to the relativised version of $\phi^{\tau}_{\mathfrak{M}}$, then increment $d$. Otherwise, do nothing to $d$ and modify the $\sigma(\mathfrak{M})$ portion of the next state according to $\phi^{\tau}_{\mathfrak{M}}$ relativised to $c$. The $\mathfrak{M}'$ defined thus witnesses $A \leq^P_{\kappa'} B$.
+If we enlarge $\sigma(\mathfrak{M}')$ in the proof of Proposition \ref{prop246} to include an additional parameter for $\kappa$, then the statements
+\begin{equation*}
+    \text{``} x < \kappa \text{'', ``} x = \kappa \text{'', and ``} x > \kappa \text{''}
+\end{equation*}
+become expressible in $(\kappa'; \in)$ by $\Delta_0$ formulas with a single free variable $x$. The rest of the proof of Proposition \ref{prop246} goes through verbatim here.
 \end{proof}
 
 \begin{rem}\label{rem256}
