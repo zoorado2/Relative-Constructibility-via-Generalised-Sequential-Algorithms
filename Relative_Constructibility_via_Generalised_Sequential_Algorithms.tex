@@ -44,6 +44,8 @@ sorting=ynt
 \usepackage{caption}
 \usepackage{float}
 
+\allowdisplaybreaks
+
 \hypersetup{
 colorlinks=true,
 linkcolor=blue
@@ -627,11 +629,11 @@ A few things are easily verifiable from Definition \ref{def220}. Let $\sigma$, $
     \item We can efficiently recover $\phi$ from the $\phi^{\ulcorner X \urcorner}$s, up to substitution of variable symbols.
     \item\label{c2pr} If there exists a structure $\mathfrak{B}$ with signature $\sigma$ and base set $A$, for which $(\mathfrak{A}, \mathfrak{B}) \models_2 \phi$, then such $\mathfrak{B}$ must be unique. Furthermore, $(\mathfrak{A}, \mathfrak{B}) \models_2 \phi$ is absolute for transitive models of $\mathsf{ZFC}$ containing $\mathfrak{A}$ and $\mathfrak{B}$.
     \item\label{c3pr} If there is no structure $\mathfrak{B}$ with signature $\sigma$ and base set $A$, for which $(\mathfrak{A}, \mathfrak{B}) \models_2 \phi$, then the cause of said non-existence is necessarily witnessed by a $\Delta_0$-definable (i.e. definable by a first-order formula over $\{\in\}$ with only bounded quantifiers) fragment of $\mathfrak{A}$'s partial valuation map of one of the $\phi^{\ulcorner X \urcorner}$s, with parameters in $A^{< \omega}$. As $\Delta_0$ definitions are absolute for transitive models of $\mathsf{ZFC}$, the existence of a witness to the non-existence such $\mathfrak{B}$ must be too.
-    \item\label{c4pr} Points \ref{c2pr} and \ref{c3pr} guarantee that whenever $\mathfrak{M}$ is a SeqA with $\sigma(\mathfrak{M}) = \sigma$, the statement
+    \item\label{c4pr} Points \ref{c2pr} and \ref{c3pr} guarantee that whenever $\mathfrak{M}$ is a SeqA with $\sigma(\mathfrak{M}) = \sigma$ and $s_0 \in S(\mathfrak{M})$, the statement
     \begin{equation*}
-        \forall s_0 \in S(\mathfrak{M}) \ \exists ! s_1 \in S(\mathfrak{M}) \ ((s_0, s_1) \models_2 \phi)
+        \exists ! s_1 \in S(\mathfrak{M}) \ ((s_0, s_1) \models_2 \phi)
     \end{equation*}
-    is absolute for transitive models of $\mathsf{ZFC}$ containing $\mathfrak{T}(\mathfrak{M})$.
+    is absolute for transitive models of $\mathsf{ZFC}$ containing $\mathfrak{T}(\mathfrak{M})$ and $s_0$.
     \item In \ref{82161} of Definition \ref{def220}, we require that each atomic formula occurring in $\phi^{\ulcorner X \urcorner}$ contains at most one symbol from $2 \cdot \sigma$ to prevent possible unbounded searches for existential witnesses, as we propagate the evaluation of our next state backwards. For example, the sentences 
     \begin{align*}
         \ulcorner \forall x \ (X_1(x) = Y_1(x) \iff & \ \exists y \ (\phi^{\ulcorner X \urcorner}(x, y) \wedge \phi^{\ulcorner Y \urcorner}(x, y))) \urcorner \text{,} \\
@@ -862,15 +864,14 @@ In this case, we say $\mathfrak{M} = (\kappa(\mathfrak{M}), \sigma(\mathfrak{M})
 Fix any limit ordinal $\kappa$. Notice that there are only countably many GSeqAs $\mathfrak{M}$ satisfying $\kappa(\mathfrak{M}) = \kappa$. Indeed, this countable set of GSeqAs specifications is absolute for transitive models of $\mathsf{ZFC}$ containing $\kappa$.
 \end{rem}
 
-\begin{defi}
+\begin{defi}\label{8224}
 If $\mathfrak{M} = (\kappa(\mathfrak{M}), \sigma(\mathfrak{M}), \phi^{\tau}_{\mathfrak{M}}, \phi^d_{\mathfrak{M}})$ is a GSeqA, define 
 \begin{enumerate}[label=(\arabic*)]
     \item $S(\mathfrak{M})$ as in Definition \ref{def224},
-    \item 
+    \item\label{82242} 
     \!
     $\begin{aligned}[t]
-       \tau_{\mathfrak{M}} := \{(s_0, s_1) \in S(\mathfrak{M})^2 : \ & \exists ! s_1 \ ((s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}) \ \vee \\
-       & (\neg \exists ! s_1 \ ((s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}) \ \wedge \ s_0 = s_1)\} \text{,}
+       \tau_{\mathfrak{M}} := \{(s_0, s_1) \in S(\mathfrak{M})^2 : \ & \exists ! x \in S(\mathfrak{M}) \ ((s_0, x) \models_2 \phi^{\tau}_{\mathfrak{M}}) \wedge (s_0, s_1) \models_2 \phi^{\tau}_{\mathfrak{M}}\} \text{,}
     \end{aligned}$
     \item 
     \!
@@ -888,13 +889,15 @@ If $\mathfrak{M} = (\kappa(\mathfrak{M}), \sigma(\mathfrak{M}), \phi^{\tau}_{\ma
 \end{enumerate}
 \end{defi}
 
+Note that according to \ref{82242} of Definition \ref{8224}, the transition function $\tau_{\mathfrak{M}}$ of a GSeqA $\mathfrak{M}$ is not required to be total on $S(\mathfrak{M})$. This is chiefly so that the design of $\phi^{\tau}_{\mathfrak{M}}$ need not account for states of $\mathfrak{M}$ not reachable from its initial states. However, $\tau_{\mathfrak{M}}$ must be defined on all states occurring in any terminating run of $\mathfrak{M}$, by definition.
+
 The next proposition highlights the important properties of GSeqAs, based on what we have discussed so far.
 
 \begin{prop}\label{prop226}
 Let $\mathfrak{M}$ be a GSeqA. Then the following are absolute for transitive models of $\mathsf{ZFC}$ containing $\mathfrak{T}(\mathfrak{M})$:
 \begin{enumerate}[label=(\arabic*)]
     \item the definition of $S(\mathfrak{M})$,
-    \item the definition of $\tau_{\mathfrak{M}}$ and $\tau_{\mathfrak{M}}$ being a function from $S(\mathfrak{M})$ into $S(\mathfrak{M})$,
+    \item the definition of $\tau_{\mathfrak{M}}$ and $\tau_{\mathfrak{M}}$ being a partial function from $S(\mathfrak{M})$ into $S(\mathfrak{M})$,
     \item the definition of $l_{\mathfrak{M}}$ and $l_{\mathfrak{M}}$ being a function from $\mathcal{P}(\kappa(\mathfrak{M}))$ into $S(\mathfrak{M})$,
     \item the definition of $I(\mathfrak{M})$,
     \item the definition of $u_{\mathfrak{M}}$ and $u_{\mathfrak{M}}$ being a function from $S(\mathfrak{M})$ into $\mathcal{P}(\kappa(\mathfrak{M}))$. 
@@ -922,9 +925,7 @@ We are left to define the $\phi^{\ulcorner X \urcorner}$s for $\ulcorner X \urco
     & \bigvee \{(\neg e_0 = \langle 0 \rangle) \wedge q(\mathrm{Out}_0(h_0), k) \wedge t_0 \! = \! \langle j \rangle \wedge x = \mathrm{Pre}(h_0) : \\
     & \exists x \ \exists y \ (\delta((c_j, k)) = (x, y, \mathrm{left}))\} \ \vee \\ 
     & \bigvee \{(\neg e_0 = \langle 0 \rangle) \wedge q(\mathrm{Out}_0(h_0), k) \wedge t_0 \! = \! \langle j \rangle \wedge x = \mathrm{Suc}(h_0) : \\
-    & \exists x \ \exists y \ (\delta((c_j, k)) = (x, y, \mathrm{right}))\} \urcorner
-\end{align*}
-\begin{align*}
+    & \exists x \ \exists y \ (\delta((c_j, k)) = (x, y, \mathrm{right}))\} \urcorner \\
     \phi^{\ulcorner t \urcorner}(x) := \ulcorner & (e_0 = \langle 0 \rangle \wedge t_0 = x) \ \vee \\
     & \bigvee \{(\neg e_0 = \langle 0 \rangle) \wedge q(\mathrm{Out}_0(h_0), k) \wedge t_0 \! = \! \langle j \rangle \wedge x = \langle j' \rangle : \\
     & \exists x \ \exists y \ (\delta((c_j, k)) = (c_{j'}, x, y))\} \urcorner \\
@@ -1751,7 +1752,7 @@ for any admissible ordinal $\alpha$, and the inclusions cannot be reversed in ge
 \end{equation}
 for admissible ordinals $\alpha$. The penultimate inclusion cannot be reversed in general because $\leq^{P, s}_{\alpha}$ is transitive for all admissible $\alpha$ but $\preceq_{\alpha}$ is not. Incidentally, by Fact \ref{fact334}, this means there exists some (necessarily singular) admissible $\alpha$ and $A, B \subset \alpha$ such that $B \leq^{P, s}_{\alpha} A$ and $B \not\in \mathbf{\Delta_1}(L_{\alpha}[A])$. That the last inclusion cannot be reversed is due to Lemmas \ref{lem269} and \ref{lem273}.  
 
-Table \ref{table3} summarises the similarities and differences among the relations $\leq^{P, s}_{\alpha}$, $\leq^P_{\alpha}$, $\leq_{\alpha}$ and $\preceq_{\alpha}$. When we say a relation possesses the property of ``oracle-analogue'', we mean that the definition of said relation depends on --- or makes reference to --- some object analogous to the oracle in the definition of classical oracle machines. When we say a relation is ``upward persistent'', we mean that said relation enlarges as its parameter $\alpha$ increases.
+Table \ref{table3} summarises the similarities and differences among the relations $\leq^{P, s}_{\alpha}$, $\leq^P_{\alpha}$, $\leq_{\alpha}$ and $\preceq_{\alpha}$. When we say a relation possesses the property of ``oracle-analogue'', we mean that the definition of said relation depends on --- or makes reference to --- some object analogous to the oracle in the definition of classical oracle machines. When we say a parametrised relation is ``upward persistent'', we mean that said relation enlarges (with respect to inclusion) as its parameter ($\alpha$, in the case of Table \ref{table3}) increases.
 
 \begin{table}[!ht]
     \caption[Comparing our new relative computability relations against more standard relations]{Comparing two of our new relative computability relations against more standard relations in the study of generalised computability, at an arbitrary admissible ordinal $\alpha$.}
