@@ -1554,11 +1554,11 @@ Again, the ``if`` portion is obvious, so assume $B \leq^P A$. By Proposition \re
 For a limit ordinal $\alpha$, an $\alpha$-machine according to Koepke (see \cite{koepke2}) is essentially a Turing machine with tape length $\alpha$, oracle length up to $\alpha$, and finitely many fixed ordinal parameters $< \alpha$. We can think of an input to an $\alpha$-machine as a code $\langle X, O \rangle$ of a pair of sets, where $X$ represents the non-oracle component of the input and $O$ represents the oracle. At limit steps the limit inferiors of previous head and state positions, along with the previous contents of each cell, are taken. The machine \emph{halts} iff it terminates in $< \alpha$ many steps.
 
 \begin{prop}\label{prop270}
-Let $\alpha$ be a limit ordinal. An $\alpha$-machine $M$ can be simulated by a GSeqAP $\mathfrak{M}$ in the sense that for any $A, B \subset \alpha$, $M$ halts on input $A$ with output $B$ iff $\mathfrak{M}$ has a short terminating run with input $A$ and output $B$.
+Let $\alpha$ be a limit ordinal. An $\alpha$-machine $M$ can be simulated by a GSeqAP $\mathfrak{M}$ in the sense that for any $A, B \subset \alpha$, $M$ halts on input $A$ with output $B$ iff $\mathfrak{M}$ has a terminating run with input $A$ and output $B$.
 \end{prop}
 
 \begin{proof}
-It is not difficult to check that modifying Example \ref{ex228} by substituting $\alpha$ for $\omega$, and adding oracle reads based on how the oracle is coded into the input (through e.g. adding a third tape), works out just fine. The finitely many ordinal parameters of an $\alpha$-machine can be ported wholesale to a GSeqAP as the latter's ordinal parameters; the way a GSeqAP determines the limit states of a computation also perfectly mimicks how limit configurations of an $\alpha$-machine are defined. Moreover, an $\alpha$-machine halting on input $A$ with output $B$ is equivalent to the GSeqAP simulating it having a short terminating run with input $A$ and output $B$.
+It is not difficult to check that modifying Example \ref{ex228} by substituting $\alpha$ for $\omega$, and adding oracle reads based on how the oracle is coded into the input (through e.g. adding a third tape), works out just fine for simulating an $\alpha$-machine on any input. The finitely many ordinal parameters of an $\alpha$-machine can be ported wholesale to a GSeqAP as the latter's ordinal parameters; the way a GSeqAP determines the limit states of a computation also perfectly mimicks how limit configurations of an $\alpha$-machine are defined. Using an additional constant symbol to incrementally keep track of the non-oracle input as it varies, we can define a canonical GSeqAP $\mathfrak{M}$ for each $\alpha$-machine $M$ such that $M$ halts on input $A$ with output $B$ is iff $\mathfrak{M}$ has a terminating run with input $A$ and output $B$.
 \end{proof}
 
 \begin{defi}[Koepke, \cite{koepke2}]
@@ -1571,7 +1571,7 @@ In this case, $M$ \emph{witnesses} $B$ \emph{is} $\alpha$\emph{-computable in} $
 \end{defi}
 
 \begin{cor}\label{cor334}
-Let $\alpha$ be a limit ordinal and $A, B \subset \alpha$. Then $B \leq^{P, s}_{\alpha} A$ if $B \preceq_{\alpha} A$.
+Let $\alpha$ be a limit ordinal and $A, B \subset \alpha$. Then $B \leq^{P}_{\alpha} A$ if $B \preceq_{\alpha} A$.
 \end{cor}
 
 \begin{proof}
@@ -1746,13 +1746,22 @@ Let us now turn our attention to the bounded relations $\leq^{P, s}_{\alpha}$ an
 \begin{equation*}
     \leq_{\alpha} \ \subset \ \leq_{w \alpha} \ \subset \ \preceq_{\alpha}
 \end{equation*}
-for any admissible ordinal $\alpha$, and the inclusions cannot be reversed in general. By Corollary \ref{cor334} and how $\leq^{P, s}_{\alpha}$ and $\leq^P_{\alpha}$ are defined, we have
+for any admissible ordinal $\alpha$, and the inclusions cannot be reversed in general. By Fact \ref{fact334} and Lemma \ref{lem273}, we have
 \begin{equation}\label{eq2}
-    \leq_{\alpha} \ \subset \ \leq_{w \alpha} \ \subset \ \preceq_{\alpha} \ \subset \ \leq^{P, s}_{\alpha} \ \subset \ \leq^P_{\alpha}
+    \leq_{\alpha} \ \subset \ \leq_{w \alpha} \ \subset \ \preceq_{\alpha} \ \subset \ \leq^P_{\alpha}
 \end{equation}
-for admissible ordinals $\alpha$. The penultimate inclusion cannot be reversed in general because $\leq^{P, s}_{\alpha}$ is transitive for all admissible $\alpha$ but $\preceq_{\alpha}$ is not. Incidentally, by Fact \ref{fact334}, this means there exists some (necessarily singular) admissible $\alpha$ and $A, B \subset \alpha$ such that $B \leq^{P, s}_{\alpha} A$ and $B \not\in \mathbf{\Delta_1}(L_{\alpha}[A])$. That the last inclusion cannot be reversed is due to Lemmas \ref{lem269} and \ref{lem273}.  
+for admissible ordinals $\alpha$. The last inclusion of (\ref{eq2}) cannot be reversed in general, again because of Fact \ref{fact334} and Lemma \ref{lem273}. On the other hand, 
+\begin{equation}\label{eq3}
+    \leq^{P, s}_{\alpha} \ \subset \ \leq^P_{\alpha}
+\end{equation}
+due to how the relations $\leq^{P, s}_{\alpha}$ and $\leq^P_{\alpha}$ are defined. The inclusion in  (\ref{eq3}) cannot be reversed for all admissible ordinals $\alpha$, as a consequence of Lemmas \ref{lem269} and \ref{lem273}. Further, it is not always the case for admissible $\alpha$ that
+\begin{itemize}
+    \item $\leq^{P, s}_{\alpha} = \leq_{w \alpha}$, because $\leq^{P, s}_{\alpha}$ is always transitive unlike $\leq_{w \alpha}$,
+    \item $\leq^{P, s}_{\alpha} = \preceq_{\alpha}$, because $\leq^{P, s}_{\alpha}$ is always transitive unlike $\preceq_{\alpha}$, and
+    \item $\leq^{P, s}_{\alpha} = \leq_{\alpha}$, because Proposition \ref{prop271n} does not hold with $\leq_{\alpha}$ in place of $\leq^{P, s}_{\alpha}$ by Theodore Slaman's answer in \cite{slaman}.
+\end{itemize}
 
-Table \ref{table3} summarises the similarities and differences among the relations $\leq^{P, s}_{\alpha}$, $\leq^P_{\alpha}$, $\leq_{\alpha}$ and $\preceq_{\alpha}$. When we say a relation possesses the property of ``oracle-analogue'', we mean that the definition of said relation depends on --- or makes reference to --- some object analogous to the oracle in the definition of classical oracle machines. When we say a parametrised relation is ``upward persistent'', we mean that said relation enlarges (with respect to inclusion) as its parameter ($\alpha$, in the case of Table \ref{table3}) increases.
+Table \ref{table3} summarises the similarities and differences among the relations $\leq^{P, s}_{\alpha}$, $\leq^P_{\alpha}$, $\leq_{\alpha}$ and $\preceq_{\alpha}$. When we say a relation possesses the property of \textit{oracle-analogue}, we mean that the definition of said relation depends on --- or makes reference to --- some object analogous to the oracle in the definition of classical oracle machines. When we say a parametrised relation is \textit{upward persistent}, we mean that said relation enlarges (with respect to inclusion) as its parameter ($\alpha$, in the case of Table \ref{table3}) increases. In other words, a binary relation $R_{\alpha}$ parametrised by admissible ordinals is upward persistent iff Proposition \ref{prop271n} holds with $R_{\alpha}$ in place of $\leq^{P, s}_{\alpha}$.
 
 \begin{table}[!ht]
     \caption[Comparing our new relative computability relations against more standard relations]{Comparing two of our new relative computability relations against more standard relations in the study of generalised computability, at an arbitrary admissible ordinal $\alpha$.}
@@ -1772,7 +1781,11 @@ Table \ref{table3} summarises the similarities and differences among the relatio
 \begin{ques}
 \leavevmode
 \begin{enumerate}[label=(\arabic*)]
-    \item How inclusive can $\leq^{P, s}_{\alpha}$ be with respect to complexity classes relativised over $L_{\alpha}$, for an admissible ordinal $\alpha$? For example, is there one such $\alpha$ for which $B \leq^{P, s}_{\alpha} A$ whenever $B \in \mathbf{\Sigma_1}(L_{\alpha}[A])$?
+    \item Is the set of relations
+    \begin{equation*}
+        \{\leq_{\alpha}, \leq_{w \alpha}, \preceq_{\alpha}, \leq^{P, s}_{\alpha}\}
+    \end{equation*}
+    linearly ordered by inclusion for all admissible ordinals $\alpha$?
     \item Does $\leq^{P}_{\alpha}$ correspond nicely to some complexity class relativised over $L_{\alpha}$, for all admissible ordinals $\alpha$? If not, how inclusive can it be?
 \end{enumerate}
 \end{ques}
